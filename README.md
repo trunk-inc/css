@@ -48,7 +48,9 @@
 ***
 
 <h2 id="short_hand">ショートハンドプロパティ</h2>   
+
 - 同じプロパティが複数ある場合はショートハンドを使う。
+- 要注意なプロパティ `background`,`border`,`font`,`margin`,`padding`
 
 例)
 ```
