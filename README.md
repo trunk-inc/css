@@ -27,13 +27,22 @@
  1. [ショートハンドプロパティ](#short_hand)
  1. [小数点の頭の「0」](#decimal_point)
  1. [URI値の引用符](#url_quote)
- 1. [HEX形式のカラーコード](#HEX_color_code)
+ 1. [16進法のカラーコード](#HEX_color_code)
  1. [プロパティの記述順序](#prop_order)
  1. [ブロック単位のインデント](#block_indent)
- 1. [プロパティ最後のセミコロン](#prop_last)
- 1. [プロパティ名最後のスペース](#prop_last_space)
+ 1. [プロパティ終端のセミコロン](#prop_last)
+ 1. [プロパティ終端のスペース](#prop_last_space)
+ 1. [セレクタ終端のスペース](#selector_last_space)
  1. [セレクタとプロパティの改行](#selector_prop_line)
-  
+ 1. [タイプセレクタの指定方法](#type_selector)
+ 1. [コメントのルール](#comment)
+ 1. [Jsで動かす要素](#js_css)
+
+<h2 id="validate">CSSバリデート</h2>
+- 正確なcssなのか検証するため、[W3C CSS Validator](http://jigsaw.w3.org/css-validator/)でチェックする。
+
+***
+
 <h2 id="short_hand">ショートハンドプロパティ</h2>   
 - 同じプロパティが複数ある場合はショートハンドを使う。
 
@@ -52,11 +61,14 @@ padding: 0 1rem 2rem;
 ***
 
 
-<h2 id="#decimal_point">小数点の「0」を省略</h2>
+<h2 id="#decimal_point">小数点の「0」を省略/単位の表記</h2>
+
 - 小数点の頭の「0」は省略する。
+- 値が0の場合は単位を省略する。
 
 例)
 ```
+/* 小数点を省略 */
 <NG>
 font-size: 0.8rem;
 opacity: 0.5;
@@ -66,12 +78,22 @@ transition all 0.2s;
 font-size: .8rem;
 opacity: .5;
 transition all .2s;
+
+/* 単位を省略 */
+<NG>
+margin: 0px;
+padding: 0px;
+
+<OK>
+margin: 0;
+padding: 0;
 ```
 
 
 ***
 
-<h2 id="url_quote">URI値の引用符</h2>  
+<h2 id="url_quote">URL値の引用符</h2>
+
 - url()での指定において、""（ダブルコーテーション）や''（シングルコーテーション）などのURI値の引用符を省略すること。
 
 例)
@@ -86,8 +108,10 @@ background-image: url(//www.google.com/css/go.css);
 
 ***
 
-<h2 id="HEX_color_code">HEXカラーコード</h2>
-- HEX形式のカラーコードで3文字で表記できるものは3文字で。
+<h2 id="HEX_color_code">16進法カラーコード</h2>
+
+- 16進法形式のカラーコードで3文字で表記できるものは3文字で。
+
 例)
 
 ```
@@ -102,7 +126,9 @@ color: #ebc;
 ***
 
 <h2 id="prop_order">プロパティ記述順序</h2>
+
 - アルファベットの順に記述。ベンダープレフィックスは無視すること。ただし、例えば-moz接頭辞は-webkitの前に来る、などの順序は保つ。
+
 例)
 
 ```
@@ -128,7 +154,9 @@ width: 1059px;
 ***
 
 <h2 id="block_indent">ブロック単位のインデント</h2>
+
 - 階層がわかりやすいように、ブロック単位でコードをインデントすること。
+
 例)
 
 ```
@@ -153,7 +181,8 @@ display: block;
 ***
 
 
-<h2 id="prop_last">プロパティ最後のセミコロン</h2>
+<h2 id="prop_last">プロパティ終端のセミコロン</h2>
+
 - すべてのプロパティの終端はセミコロンを書くこと。
 
 例)
@@ -177,7 +206,8 @@ display: block;
 ***
 
 
-<h2 id="prop_last_space">プロパティ名最後のスペース</h2>
+<h2 id="prop_last_space">プロパティ名終端のスペース</h2>
+
 - すべてのプロパティ名の終端のコロンの後にスペースを入れる。
 
 例)
@@ -198,9 +228,36 @@ display: block;
 
 ***
 
+<h2 id="selector_last_space">セレクタ終端のスペース</h2>
+
+- セレクタ終端に１つスペースを入れる。
+
+例)
+
+```
+<NG>
+#sample{
+  margin-top: 1rem;
+}
+
+/* 改行は必要ない */
+#sample
+{
+  margin-top: 1rem;
+}
+
+<OK>
+#sample {
+  margin-top: 1rem;
+}
+
+```
+
+***
 
 
 <h2 id="prop_last">プロパティの改行</h2>
+
 - プロパティは改行して記述すること。
 
 例)
@@ -225,6 +282,7 @@ display: block;
 
 
 <h2 id="selector_prop_line">セレクタとプロパティの改行</h2>
+
 - 別々のセレクタとプロパティがある場合は改行して書くこと。
 
 例)
@@ -248,6 +306,7 @@ display: block;
 
 
 <h2 id="type_selector">タイプセレクタの指定方法</h2>
+
 - 依存性をなくすため、タイプセレクタにIDとクラス名を記述しないようにする。子孫セレクタもできれば避ける。
 
 例)
@@ -274,6 +333,7 @@ div.sample {
 
 
 <h2 id="comment">コメントのルール</h2>
+
 - セクション毎にコメントする
 - コメントの形は`/* */`で囲む
 
@@ -295,3 +355,17 @@ hoge
 
 
 ***
+
+
+<h2 id="js_css">Jsで動かす要素</h2>
+
+- jsでアニメーションをさせたり、jsで扱う部分は文頭に「js-」をつける
+- 「js-」をつけていない要素はjsで扱わない。
+
+例)
+
+```
+<OK>
+.js-hogehoge
+#js-hogehoge
+```
