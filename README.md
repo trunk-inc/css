@@ -25,13 +25,12 @@ BEMは色々なルールがあるが、TRUNKは公式に則る
 <br>
 
 ## index
-
-  1. [ショートハンドプロパティ](#short_hand)
-  1. [小数点の頭の「0」](#decimal_point)
-  1. [URI値の引用符](#url_quote)
-  1. [HEX形式のカラーコード](#HEX_color_code)
-  1. [プロパティの記述順序](#prop_order)
-  1. [ブロック単位のインデント](#block_indent)
+ 1. [ショートハンドプロパティ](#short_hand)
+ 1. [小数点の頭の「0」](#decimal_point)
+ 1. [URI値の引用符](#url_quote)
+ 1. [HEX形式のカラーコード](#HEX_color_code)
+ 1. [プロパティの記述順序](#prop_order)
+ 1. [ブロック単位のインデント](#block_indent)
   
 ## <a href="#short_hand">ショートハンドプロパティ</a>
 - 同じプロパティが複数ある場合はショートハンドを使う。
