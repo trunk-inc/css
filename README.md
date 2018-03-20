@@ -50,7 +50,7 @@ padding: 0 1rem 2rem;
 ***
 
 
-## <a href="#decimal_point">小数点の頭の「0」</a>
+<h2 id="#decimal_point">小数点の頭の「0」</h2>
 - 小数点の頭の「0」は省略する。
 
 例)
@@ -69,8 +69,7 @@ transition all .2s;
 
 ***
 
-
-## <a href="#url_quote">URI値の引用符</a>
+<h2 id="url_quote">URI値の引用符</h2>  
 - url()での指定において、""（ダブルコーテーション）や''（シングルコーテーション）などのURI値の引用符を省略すること。
 
 例)
@@ -85,7 +84,7 @@ background-image: url(//www.google.com/css/go.css);
 
 ***
 
-## <a href="#HEX_color_code">HEX形式のカラーコード</a>
+<h2 id="HEX_color_code">HEX形式のカラーコード</h2>
 - HEX形式のカラーコードで3文字で表記できるものは3文字にする。
 例)
 ```
@@ -99,8 +98,7 @@ color: #ebc;
 
 ***
 
-
-## <a href="#prop_order">プロパティの記述順序</a>
+<h2 id="prop_order">プロパティの記述順序</h2>
 - アルファベットの順に記述。ベンダープレフィックスは無視すること。ただし、例えば-moz接頭辞は-webkitの前に来る、などの順序は保つ。
 例)
 
@@ -126,7 +124,7 @@ width: 1059px;
 
 ***
 
-## <a href="#block_indent">ブロック単位のインデント</a>
+<h2 id="block_indent">ブロック単位のインデント</h2>
 - 階層がわかりやすいように、ブロック単位でコードをインデントすること。
 例)
 
