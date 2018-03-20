@@ -345,10 +345,27 @@ div.sample {
 
 ```
 <NG>
-// hogehoge
+// header
+
+// main
+
+// footer
 
 <OK>
-/* hogehoge */
+/* header */
+.header{
+ hogehoge...
+}
+
+/* main */
+.main{
+ hogehoge...
+}
+
+/* footer */
+.footer{
+  hogehoge...
+}
 
 複数行の場合は、
 /*
