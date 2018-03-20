@@ -7,6 +7,10 @@
 [BEM公式ドキュメント](https://en.bem.info/methodology/quick-start/#modifier) 
 [google公式翻訳](http://buchineko.website/google_styleguide_html/)
 
+参考
+- [GoogleのCSSガイダンスに沿ったコーディング方法について](https://seopack.jp/internal-seo/basic/google-css-style-guide.php)
+- [Google HTML/CSS Style Guide まとめ](https://qiita.com/Sugima/items/785644372397595644ba)
+
 ### BEMの書き方
 - クラスは **ケバブケース** で書く
 例) `.block-name` `.block-name__element_modifier`
@@ -23,7 +27,7 @@
 例) `.block-name__element_modifier`
 <br>
 
-## index
+## 目次
  1. [ショートハンドプロパティ](#short_hand)
  1. [小数点の頭の「0」](#decimal_point)
  1. [URI値の引用符](#url_quote)
@@ -36,7 +40,7 @@
  1. [セレクタとプロパティの改行](#selector_prop_line)
  1. [タイプセレクタの指定方法](#type_selector)
  1. [コメントのルール](#comment)
- 1. [Jsで動かす要素](#js_css)
+ 1. [Jsで扱う要素](#js_css)
 
 <h2 id="validate">CSSバリデート</h2>
 - 正確なcssなのか検証するため、[W3C CSS Validator](http://jigsaw.w3.org/css-validator/)でチェックする。
@@ -357,7 +361,7 @@ hoge
 ***
 
 
-<h2 id="js_css">Jsで動かす要素</h2>
+<h2 id="js_css">Jsで扱う要素</h2>
 
 - jsでアニメーションをさせたり、jsで扱う部分は文頭に「js-」をつける
 - 「js-」をつけていない要素はjsで扱わない。
