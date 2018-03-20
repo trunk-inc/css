@@ -1,9 +1,8 @@
-# css
-TRUNKで使用するcss
+# TRUNK Css Style Guide
 
-##　概要
-BEMとGoogleのルールに則る
-BEMは色々なルールがあるが、TRUNKは公式に則る
+## 概要
+- BEMとGoogleのルールに則る
+- BEMは色々なルールがあるが、TRUNKは公式に則る
 
 [BEM公式ドキュメント](https://en.bem.info/methodology/quick-start/#modifier) 
 [google公式翻訳](http://buchineko.website/google_styleguide_html/)
@@ -243,3 +242,56 @@ display: block;
 }
 
 ```
+
+
+***
+
+
+<h2 id="type_selector">タイプセレクタの指定方法</h2>
+- 依存性をなくすため、タイプセレクタにIDとクラス名を記述しないようにする。子孫セレクタもできれば避ける。
+
+例)
+
+```
+<NG>
+ul#sample {
+ hoge... 
+}
+div.sample {
+ hoge...
+}
+  
+<OK>
+#sample {
+ hoge...
+}
+.sample {
+ hoge...
+}
+```
+
+***
+
+
+<h2 id="comment">コメントのルール</h2>
+- セクション毎にコメントする
+- コメントの形は`/* */`で囲む
+
+例)
+
+```
+<NG>
+// hogehoge
+
+<OK>
+/* hogehoge */
+
+複数行の場合は、
+/*
+hoge
+hoge
+*/
+```
+
+
+***
