@@ -31,6 +31,9 @@ BEMは色々なルールがあるが、TRUNKは公式に則る
  1. [HEX形式のカラーコード](#HEX_color_code)
  1. [プロパティの記述順序](#prop_order)
  1. [ブロック単位のインデント](#block_indent)
+ 1. [プロパティ最後のセミコロン](#prop_last)
+ 1. [プロパティ名最後のスペース](#prop_last_space)
+ 1. [セレクタとプロパティの改行](#selector_prop_line)
   
 <h2 id="short_hand">ショートハンドプロパティ</h2>   
 - 同じプロパティが複数ある場合はショートハンドを使う。
@@ -50,7 +53,7 @@ padding: 0 1rem 2rem;
 ***
 
 
-<h2 id="#decimal_point">小数点の頭の「0」</h2>
+<h2 id="#decimal_point">小数点の「0」を省略</h2>
 - 小数点の頭の「0」は省略する。
 
 例)
@@ -84,9 +87,10 @@ background-image: url(//www.google.com/css/go.css);
 
 ***
 
-<h2 id="HEX_color_code">HEX形式のカラーコード</h2>
-- HEX形式のカラーコードで3文字で表記できるものは3文字にする。
+<h2 id="HEX_color_code">HEXカラーコード</h2>
+- HEX形式のカラーコードで3文字で表記できるものは3文字で。
 例)
+
 ```
 <NG>
 color: #eebbcc;
@@ -98,7 +102,7 @@ color: #ebc;
 
 ***
 
-<h2 id="prop_order">プロパティの記述順序</h2>
+<h2 id="prop_order">プロパティ記述順序</h2>
 - アルファベットの順に記述。ベンダープレフィックスは無視すること。ただし、例えば-moz接頭辞は-webkitの前に来る、などの順序は保つ。
 例)
 
@@ -150,3 +154,92 @@ display: block;
 ***
 
 
+<h2 id="prop_last">プロパティ最後のセミコロン</h2>
+- すべてのプロパティの終端はセミコロンを書くこと。
+
+例)
+
+```
+<NG>
+.sample {
+  display: block;
+  height: 100px
+}
+
+<OK>
+.sample {
+  display: block;
+  height: 100px;
+}
+
+```
+
+
+***
+
+
+<h2 id="prop_last_space">プロパティ名最後のスペース</h2>
+- すべてのプロパティ名の終端のコロンの後にスペースを入れる。
+
+例)
+
+```
+<NG>
+.sample {
+  display:block;
+}
+
+<OK>
+.sample {
+  display: block;
+}
+
+```
+
+
+***
+
+
+
+<h2 id="prop_last">プロパティの改行</h2>
+- プロパティは改行して記述すること。
+
+例)
+
+```
+<NG>
+.sample {
+  color: #444; display:block; width: 300px;
+}
+
+<OK>
+.sample {
+  color: #444;
+  display: block;
+  width: 300px;
+}
+
+```
+
+
+***
+
+
+<h2 id="selector_prop_line">セレクタとプロパティの改行</h2>
+- 別々のセレクタとプロパティがある場合は改行して書くこと。
+
+例)
+
+```
+<NG>
+.sample, .hogehoge {
+  display:block;
+}
+
+<OK>
+.sample,
+.hogehoge {
+  display: block;
+}
+
+```
