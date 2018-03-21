@@ -41,6 +41,7 @@
  1. [タイプセレクタの指定方法](#type_selector)
  1. [コメントのルール](#comment)
  1. [Jsで扱う要素](#js_css)
+ 1. [font-size指定](#font_size)
 
 <h2 id="validate">CSSバリデート</h2>
 - 正確なcssなのか検証するため、[W3C CSS Validator](http://jigsaw.w3.org/css-validator/)でチェックする。
@@ -342,6 +343,8 @@ div.sample {
 
 - セクション毎にコメントする
 - コメントの形は`/* */`で囲む
+- セクション終了時に `/* end */`と書く
+- コメントを書く場合は上下1行あける
 
 例)
 
@@ -355,19 +358,28 @@ div.sample {
 
 <OK>
 /* header */
+
 .header{
  hogehoge...
 }
 
+/* end */
+
 /* main */
+
 .main{
  hogehoge...
 }
 
+/* end */
+
 /* footer */
+
 .footer{
   hogehoge...
 }
+
+/* end */
 
 複数行の場合は、
 /*
@@ -384,6 +396,23 @@ hoge
 
 - jsでアニメーションをさせたり、jsで扱う部分は文頭に「js-」をつける
 - 「js-」をつけていない要素はjsで扱わない。
+
+例)
+
+```
+<OK>
+.js-hogehoge
+#js-hogehoge
+```
+
+
+***
+
+
+<h2 id="js_css">font-sizeの指定</h2>
+
+- `rem`です。
+- わかりやすい[記事](http://infinityforest.net/home/archives/3091)
 
 例)
 
