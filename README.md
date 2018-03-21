@@ -396,10 +396,19 @@ hoge
 
 - jsでアニメーションをさせたり、jsで扱う部分は文頭に「js-」をつける
 - 「js-」をつけていない要素はjsで扱わない。
+- 「js-」のclassにstyleは記述しない。トリガーとしてだけ使う
 
 例)
 
 ```
+
+<NG>
+/* styleを当てる */
+.js-hoge{
+ .......
+}
+
+
 <OK>
 .js-hogehoge
 #js-hogehoge
