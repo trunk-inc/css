@@ -433,6 +433,54 @@ hoge
 
 ***
 
+## 外余白のルール
+- 外に余白をつけるときは、matginをつける
+- marginは原則に下方向`margin-bottom`をつける / 横方向は`margin-right`をつける
+
+例)
+```
+<NG>
+.sample {
+  margin: 20px 0 0 20px;
+  or
+  margin-right: 20px;
+}
+
+<OK>
+.sample {
+  margin: 0 20px 20px 0;
+  or
+  margin-right: 20px;
+}
+```
+
+## 擬似クラス
+- 原則`last-child`を使う。
+- 途中の要素を変更したい場合は`nth-of-type`と`nth-child`を使う
+- `nth-oy-type`と`nth-child`の違いは要素（p, a, liなど）を判別して数えるかどうか。
+[擬似クラス nth-childとnth-of-type](https://qiita.com/kudo_kk/items/8277c1f0eae18e15dd64)
+
+例)
+```
+<NG>
+
+ /* scss */
+.sample {
+  margin-right: 20px;
+  &:first-child {
+    margin-right: 0;
+  }
+}
+  
+<OK>
+.sample {
+  margin-right: 20px;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+```
+
 ## クラスの命名ルール
 
 - 参考にしたもの[CSSのクラス名を決めるときに使うリストをつくりました](https://qiita.com/manabuyasuda/items/dbb76ed36970bec95470)
