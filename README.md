@@ -511,7 +511,7 @@ $COLOR_RED: #ab0835;
 
 ## 余白のルール
 - 外に余白をつけるときは、matginをつける
-- marginは原則に下方向`margin-bottom`をつける / 横方向は`margin-right`をつける
+- marginは原則下方向`margin-bottom`をつける / 横方向は`margin-right`をつける
 
 例)
 ```
