@@ -432,3 +432,10 @@ hoge
 ```
 
 ***
+
+## クラスの命名ルール
+
+- 参考にしたもの[CSSのクラス名を決めるときに使うリストをつくりました](https://qiita.com/manabuyasuda/items/dbb76ed36970bec95470)
+
+
+
