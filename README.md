@@ -417,27 +417,6 @@ hoge
 
 ***
 
-## 外余白のルール
-- 外に余白をつけるときは、matginをつける
-- marginは原則に下方向`margin-bottom`をつける / 横方向は`margin-right`をつける
-
-例)
-```
-<NG>
-.sample {
-  margin: 20px 0 0 20px;
-  or
-  margin-right: 20px;
-}
-
-<OK>
-.sample {
-  margin: 0 20px 20px 0;
-  or
-  margin-right: 20px;
-}
-```
-
 ## 擬似クラス
 - 原則`last-child`を使う。
 - 途中の要素を変更したい場合は`nth-of-type`と`nth-child`を使う
@@ -471,23 +450,81 @@ hoge
 
 デザイン完成後
 
-## SCSSのmixin
+## SCSSの定数指定
 
-### メディアクエリ
+- グローバル(color.scssなど)の定数は原則大文字、スネークケース
+- ローカル定数(各scssファイルで使いたい変数)はscssのルールで書く
+- 定数の名前は主語が文頭、目的語が文末。 数字からや特殊文字から始まるのはNG
+
+```
+/* グローバル */
+<NG>
+$bp_desktop: 750px;
+$color_main: #000;
+$color_red: #ab0835;
+
+<OK>
+$BP_DESKTOP: 750px;
+$COLOR_MAIN: #000;
+$COLOR_RED: #ab0835;
+```
+
+## メディアクエリ
+- scssのmixinで定義したものをincludeして使う
 
 例)
 
 ```
 <ブレイクポイント以下>
 @include mq-small {
-  hogehoge
+  .sample {
+    hogehofe
+  }
 }
   
 <ブレイクポイント以上>
 @include mq-large {
-  hogehoge
+  .sample {
+    hogehofe
+  }
 }
 ```
 
+***
 
+## font-sizeの指定
 
+```
+<NG>
+.sample {
+  font-size: 12px;
+}
+
+<OK>
+.sample {
+  @include font-size(12);
+}
+```
+
+## 余白のルール
+- 外に余白をつけるときは、matginをつける
+- marginは原則に下方向`margin-bottom`をつける / 横方向は`margin-right`をつける
+
+例)
+```
+<NG>
+.sample {
+  margin: 20px 0 0 20px;
+  or
+  margin-right: 20px;
+}
+
+<OK>
+.sample {
+  margin: 0 20px 20px 0;
+  or
+  margin-right: 20px;
+}
+```
+
+***
