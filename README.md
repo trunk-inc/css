@@ -455,6 +455,7 @@ hoge
 - グローバル(color.scssなど)の定数は原則大文字、スネークケース
 - ローカル定数(各scssファイルで使いたい変数)はscssのルールで書く
 - 定数の名前は主語が文頭、目的語が文末。 数字からや特殊文字から始まるのはNG
+- 使える記号は`_`と`-`のみ。
 
 ```
 /* グローバル */
@@ -462,6 +463,8 @@ hoge
 $bp_desktop: 750px;
 $color_main: #000;
 $color_red: #ab0835;
+$10_Width: 300px;
+$+color-red: red;
 
 <OK>
 $BP_DESKTOP: 750px;
