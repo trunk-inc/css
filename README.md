@@ -494,6 +494,9 @@ $COLOR_RED: #ab0835;
 
 ## font-sizeの指定
 
+- scssのmixinで定義したものをincludeして使う
+- `()`内に指定したい値を入れる
+
 ```
 <NG>
 .sample {
