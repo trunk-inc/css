@@ -417,22 +417,6 @@ hoge
 
 ***
 
-
-<h2 id="js_css">font-sizeの指定</h2>
-
-- `rem`です。
-- わかりやすい[記事](http://infinityforest.net/home/archives/3091)
-
-例)
-
-```
-<OK>
-.js-hogehoge
-#js-hogehoge
-```
-
-***
-
 ## 外余白のルール
 - 外に余白をつけるときは、matginをつける
 - marginは原則に下方向`margin-bottom`をつける / 横方向は`margin-right`をつける
@@ -494,11 +478,15 @@ hoge
 例)
 
 ```
-  <ブレイクポイント>
-```
-  @include mq-small {
-    hogehoge
-  }
+<ブレイクポイント以下>
+@include mq-small {
+  hogehoge
+}
+  
+<ブレイクポイント以上>
+@include mq-large {
+  hogehoge
+}
 ```
 
 
