@@ -487,3 +487,19 @@ hoge
 
 デザイン完成後
 
+## SCSSのmixin
+
+### メディアクエリ
+
+例)
+
+```
+  <ブレイクポイント>
+```
+  @include mq-small {
+    hogehoge
+  }
+```
+
+
+
