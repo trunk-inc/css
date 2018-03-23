@@ -476,32 +476,53 @@ $COLOR_RED: #ab0835;
 ```
 
 <h2 id="media">メディアクエリ</h2>
+
 - scssのmixinで定義したものをincludeして使う
+- 指定したい場所単位で使う
 
 例)
 
 ```
 <ブレイクポイント以下>
-@include mq-small {
-  .sample {
-    hogehofe
+.sample1 {
+  @include mq-small {
+    color: $COLOR_MAIN
   }
 }
-  
+
+.sample2 {
+  @include mq-small {
+    color: $COLOR_MAIN
+  }
+}
+
 <ブレイクポイント以上>
-@include mq-large {
-  .sample {
-    hogehofe
+.sample1 {
+  @include mq-large {
+    color: $COLOR_MAIN
   }
 }
+
+.sample2 {
+  @include mq-large {
+    color: $COLOR_MAIN
+  }
+}
+
 ```
 
 ***
 
 <h2 id="font_size">font-sizeの指定</h2>
 
+- サイズの指定方法は「rem」を使う
+...単に大きさを`px`と`rem`指定した差はありません。しかし、`px`は絶対指定なので、`font-family`やブラウザ毎の違いで大きさにムラが出てしまう。
+`rem`はroot(html)を基準に大きさを計算するので、rootの大きさを決めてしまえば、大きさを統一出来る。
+
 - scssのmixinで定義したものをincludeして使う
 - `()`内に指定したい値を入れる
+
+- 参考 [CSSで知っておきたい、フォントサイズ指定の単位のすべて](https://ferret-plus.com/7062)
 
 ```
 <NG>
