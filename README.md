@@ -41,7 +41,10 @@
  1. [タイプセレクタの指定方法](#type_selector)
  1. [コメントのルール](#comment)
  1. [Jsで扱う要素](#js_css)
+ 1. [定数の指定方法](#var)
+ 1. [メディアクエリ])(#media)
  1. [font-size指定](#font_size)
+ 1. [余白のルール](#margin)
 
 <h2 id="validate">CSSバリデート</h2>
 - 正確なcssなのか検証するため、[W3C CSS Validator](http://jigsaw.w3.org/css-validator/)でチェックする。
@@ -450,7 +453,7 @@ hoge
 
 デザイン完成後
 
-## SCSSの定数指定
+<h2 id="var">定数の指定方法</h2>
 
 - グローバル(color.scssなど)の定数は原則大文字、スネークケース
 - ローカル定数(各scssファイルで使いたい変数)はscssのルールで書く
@@ -472,7 +475,7 @@ $COLOR_MAIN: #000;
 $COLOR_RED: #ab0835;
 ```
 
-## メディアクエリ
+<h2 id="media">メディアクエリ</h2>
 - scssのmixinで定義したものをincludeして使う
 
 例)
@@ -495,7 +498,7 @@ $COLOR_RED: #ab0835;
 
 ***
 
-## font-sizeの指定
+<h2 id="font_size">font-sizeの指定</h2>
 
 - scssのmixinで定義したものをincludeして使う
 - `()`内に指定したい値を入れる
@@ -512,7 +515,7 @@ $COLOR_RED: #ab0835;
 }
 ```
 
-## 余白のルール
+<h2 id="margin">余白のルール</h2>
 - 外に余白をつけるときは、matginをつける
 - marginは原則下方向`margin-bottom`をつける / 横方向は`margin-right`をつける
 
