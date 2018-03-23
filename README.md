@@ -42,7 +42,7 @@
  1. [コメントのルール](#comment)
  1. [Jsで扱う要素](#js_css)
  1. [定数の指定方法](#var)
- 1. [メディアクエリ])(#media)
+ 1. [メディアクエリ](#media)
  1. [font-size指定](#font_size)
  1. [余白のルール](#margin)
 
