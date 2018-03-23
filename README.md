@@ -420,6 +420,31 @@ hoge
 
 ***
 
+
+<h2 id="margin">余白のルール</h2>
+
+- 外に余白をつけるときは、marginをつける
+- marginは原則下方向`margin-bottom`をつける / 横方向は`margin-right`をつける
+
+例)
+```
+<NG>
+.sample {
+  margin: 20px 0 0 20px;
+  or
+  margin-right: 20px;
+}
+
+<OK>
+.sample {
+  margin: 0 20px 20px 0;
+  or
+  margin-right: 20px;
+}
+```
+
+***
+
 ## 擬似クラス(余白の指定)
 - 原則`last-child`を使う。
 - 途中の要素を変更したい場合は`nth-of-type`と`nth-child`を使う
@@ -533,28 +558,6 @@ $COLOR_RED: #ab0835;
 <OK>
 .sample {
   @include font-size(12);
-}
-```
-
-<h2 id="margin">余白のルール</h2>
-
-- 外に余白をつけるときは、marginをつける
-- marginは原則下方向`margin-bottom`をつける / 横方向は`margin-right`をつける
-
-例)
-```
-<NG>
-.sample {
-  margin: 20px 0 0 20px;
-  or
-  margin-right: 20px;
-}
-
-<OK>
-.sample {
-  margin: 0 20px 20px 0;
-  or
-  margin-right: 20px;
 }
 ```
 
