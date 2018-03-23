@@ -537,7 +537,8 @@ $COLOR_RED: #ab0835;
 ```
 
 <h2 id="margin">余白のルール</h2>
-- 外に余白をつけるときは、matginをつける
+
+- 外に余白をつけるときは、marginをつける
 - marginは原則下方向`margin-bottom`をつける / 横方向は`margin-right`をつける
 
 例)
