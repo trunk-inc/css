@@ -558,7 +558,3 @@ $COLOR_RED: #ab0835;
 ```
 
 ***
-
-
-<iframe height='265' scrolling='no' title='dialog_modal' src='//codepen.io/sengoku/embed/aYmzzb/?height=265&theme-id=0&default-tab=css,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/sengoku/pen/aYmzzb/'>dialog_modal</a> by kizuku sengoku (<a href='https://codepen.io/sengoku'>@sengoku</a>) on <a href='https://codepen.io'>CodePen</a>.
-</iframe>
