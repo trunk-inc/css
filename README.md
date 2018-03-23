@@ -420,7 +420,7 @@ hoge
 
 ***
 
-## 擬似クラス
+## 擬似クラス(余白の指定)
 - 原則`last-child`を使う。
 - 途中の要素を変更したい場合は`nth-of-type`と`nth-child`を使う
 - `nth-oy-type`と`nth-child`の違いは要素（p, a, liなど）を判別して数えるかどうか。
