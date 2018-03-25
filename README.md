@@ -402,6 +402,7 @@
  ***
 
  <h3 id="border_none">borderの打ち消し</h3>
+ 
  - `border`を打ち消す場合は`none`ではなく、`0`を指定する。
  `none`は`border-style` `0`は`border-width`
  styleのinitial(初期値)はnoneですが、widthのinitial(初期値)はmediumであり`0`ではない。
@@ -474,6 +475,7 @@
  ***
 
  ## 擬似クラス(余白の指定)
+ 
  - 原則`last-child`を使う。
  - 途中の要素を変更したい場合は`nth-of-type`と`nth-child`を使う
  - `nth-oy-type`と`nth-child`の違いは要素（p, a, liなど）を判別して数えるかどうか。
