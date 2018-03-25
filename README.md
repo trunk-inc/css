@@ -27,29 +27,175 @@
 例) `.block-name__element_modifier`
 <br>
 
-## 目次
- 1. [ショートハンドプロパティ](#short_hand)
- 1. [小数点の頭の「0」](#decimal_point)
- 1. [URI値の引用符](#url_quote)
- 1. [16進法のカラーコード](#HEX_color_code)
- 1. [プロパティの記述順序](#prop_order)
- 1. [ブロック単位のインデント](#block_indent)
- 1. [プロパティ終端のセミコロン](#prop_last)
- 1. [プロパティ終端のスペース](#prop_last_space)
- 1. [セレクタ終端のスペース](#selector_last_space)
- 1. [セレクタとプロパティの改行](#selector_prop_line)
- 1. [タイプセレクタの指定方法](#type_selector)
- 1. [コメントのルール](#comment)
- 1. [Jsで扱う要素](#js_css)
- 1. [定数の指定方法](#var)
- 1. [メディアクエリ](#media)
- 1. [font-size指定](#font_size)
- 1. [余白のルール](#margin)
+## フォーマット
+- cssはscssで書く
+- インデントは２スペース
+- プロパティの記述順序はABC順に
+- ブロック単位のインデント
+- プロパティ終端のセミコロンをつける
+- プロパティ終端のスペースを入れる
+- セレクタ終端のスペースを入れる
+- cssにおいて`id`は使わない(jsのフックとして使用する場合は可)
+
+## 例
+
+ ### フォーマット
+  1. [プロパティの記述順序](#prop_order)
+  1. [ブロック単位のインデント](#block_indent)
+  1. [プロパティ終端のセミコロン](#prop_last)
+  1. [プロパティ終端のスペース](#prop_last_space)
+  1. [セレクタ終端のスペース](#selector_last_space)
+  
+ ### その他指定
+  1. [ショートハンドプロパティ](#short_hand)
+  1. [小数点の頭の「0」](#decimal_point)
+  1. [URI値の引用符](#url_quote)
+  1. [16進法のカラーコード](#HEX_color_code)         
+  1. [セレクタとプロパティの改行](#selector_prop_line)
+  1. [タイプセレクタの指定方法](#type_selector)
+  1. [コメントのルール](#comment)
+  1. [borderの打ち消し](#border-none)
+  1. [Jsで扱う要素](#js_css)
+  
+ ### sass
+  1. [プロパティの宣言順序](#prop_order_sass)
+  1. [定数の指定方法](#var)
+  1. [メディアクエリ](#media)
+  1. [font-size指定](#font_size)
+  1. [余白のルール](#margin)
 
 <h2 id="validate">CSSバリデート</h2>
 - 正確なcssなのか検証するため、[W3C CSS Validator](http://jigsaw.w3.org/css-validator/)でチェックする。
 
 ***
+
+## フォーマット(例)
+
+<h2 id="prop_order">プロパティ記述順序</h2>
+
+- アルファベットの順に記述。ベンダープレフィックスは無視すること。ただし、例えば-moz接頭辞は-webkitの前に来る、などの順序は保つ。
+
+例)
+
+```
+<NG>
+width: 1059px;
+border: 1px solid;
+-moz-border-radius: 4px;
+color: black;
+text-align: center;
+-webkit-border-radius: 4px;
+
+<OK>
+border: 1px solid;
+-moz-border-radius: 4px;
+-webkit-border-radius: 4px;
+border-radius: 4px;
+color: black;
+text-align: center;
+width: 1059px;
+```
+
+***
+
+<h2 id="block_indent">ブロック単位のインデント</h2>
+
+- 階層がわかりやすいように、ブロック単位でコードをインデントすること。
+
+例)
+
+```
+<NG>
+.block {
+&__element {
+color: #333;
+display: block;
+}
+}
+
+<OK>
+.block {
+  &__element {
+    color: #333;
+    display: block;
+  }
+}
+```
+
+***
+
+<h2 id="prop_last">プロパティ終端のセミコロン</h2>
+
+- すべてのプロパティの終端はセミコロンを書くこと。
+
+例)
+
+```
+<NG>
+.sample {
+  display: block;
+  height: 100px
+}
+
+<OK>
+.sample {
+  display: block;
+  height: 100px;
+}
+
+```
+
+***
+
+<h2 id="prop_last_space">プロパティ名終端のスペース</h2>
+
+- すべてのプロパティ名の終端のコロンの後にスペースを入れる。
+
+例)
+
+```
+<NG>
+.sample {
+  display:block;
+}
+
+<OK>
+.sample {
+  display: block;
+}
+
+```
+
+***
+
+<h2 id="selector_last_space">セレクタ終端のスペース</h2>
+
+- セレクタ終端に１つスペースを入れる。
+
+例)
+
+```
+<NG>
+#sample {
+  margin-top: 1rem;
+}
+
+/* 改行は必要ない */
+#sample
+{
+  margin-top: 1rem;
+}
+
+<OK>
+#sample {
+  margin-top: 1rem;
+}
+
+```
+
+***
+
+## その他指定(例)
 
 <h2 id="short_hand">ショートハンドプロパティ</h2>   
 
@@ -69,7 +215,6 @@ padding: 0 1rem 2rem;
 ```
 
 ***
-
 
 <h2 id="#decimal_point">小数点の「0」を省略/単位の表記</h2>
 
@@ -99,7 +244,6 @@ margin: 0;
 padding: 0;
 ```
 
-
 ***
 
 <h2 id="url_quote">URL値の引用符</h2>
@@ -114,7 +258,6 @@ background-image: url("//www.google.com/css/go.css");
 OK
 background-image: url(//www.google.com/css/go.css);
 ```
-
 
 ***
 
@@ -132,139 +275,7 @@ color: #eebbcc;
 color: #ebc;
 ```
 
-
 ***
-
-<h2 id="prop_order">プロパティ記述順序</h2>
-
-- アルファベットの順に記述。ベンダープレフィックスは無視すること。ただし、例えば-moz接頭辞は-webkitの前に来る、などの順序は保つ。
-
-例)
-
-```
-<NG>
-width: 1059px;
-border: 1px solid;
--moz-border-radius: 4px;
-color: black;
-text-align: center;
--webkit-border-radius: 4px;
-
-<OK>
-border: 1px solid;
--moz-border-radius: 4px;
--webkit-border-radius: 4px;
-border-radius: 4px;
-color: black;
-text-align: center;
-width: 1059px;
-```
-
-
-***
-
-<h2 id="block_indent">ブロック単位のインデント</h2>
-
-- 階層がわかりやすいように、ブロック単位でコードをインデントすること。
-
-例)
-
-```
-<NG>
-.block{
-&__element{
-color: #333;
-display: block;
-}
-}
-
-<OK>
-.block{
-  &__element{
-   color: #333;
-   display: block;
-  }
-}
-```
-
-
-***
-
-
-<h2 id="prop_last">プロパティ終端のセミコロン</h2>
-
-- すべてのプロパティの終端はセミコロンを書くこと。
-
-例)
-
-```
-<NG>
-.sample {
-  display: block;
-  height: 100px
-}
-
-<OK>
-.sample {
-  display: block;
-  height: 100px;
-}
-
-```
-
-
-***
-
-
-<h2 id="prop_last_space">プロパティ名終端のスペース</h2>
-
-- すべてのプロパティ名の終端のコロンの後にスペースを入れる。
-
-例)
-
-```
-<NG>
-.sample {
-  display:block;
-}
-
-<OK>
-.sample {
-  display: block;
-}
-
-```
-
-
-***
-
-<h2 id="selector_last_space">セレクタ終端のスペース</h2>
-
-- セレクタ終端に１つスペースを入れる。
-
-例)
-
-```
-<NG>
-#sample{
-  margin-top: 1rem;
-}
-
-/* 改行は必要ない */
-#sample
-{
-  margin-top: 1rem;
-}
-
-<OK>
-#sample {
-  margin-top: 1rem;
-}
-
-```
-
-***
-
 
 <h2 id="prop_last">プロパティの改行</h2>
 
@@ -287,9 +298,7 @@ display: block;
 
 ```
 
-
 ***
-
 
 <h2 id="selector_prop_line">セレクタとプロパティの改行</h2>
 
@@ -324,23 +333,22 @@ display: block;
 ```
 <NG>
 ul#sample {
- hoge... 
+  hoge... 
 }
 div.sample {
- hoge...
+  hoge...
 }
   
 <OK>
 #sample {
- hoge...
+  hoge...
 }
 .sample {
- hoge...
+  hoge...
 }
 ```
 
 ***
-
 
 <h2 id="comment">コメントのルール</h2>
 
@@ -391,9 +399,29 @@ hoge
 */
 ```
 
-
 ***
 
+<h2 id="border_none">borderの打ち消し</h2>
+- `border`を打ち消す場合は`none`ではなく、`0`を指定する。
+`none`は`border-style` `0`は`border-width`
+styleのinitial(初期値)はnoneですが、widthのinitial(初期値)はmediumであり`0`ではない。
+よって、`border-style`を`none`にしても`border-width`は消えない
+
+例)
+
+```
+<NG>
+.sample {
+  border-bottom: none;
+}
+
+<OK>
+.sample {
+  border-bottom: 0;
+}
+```
+
+***
 
 <h2 id="js_css">Jsで扱う要素</h2>
 
@@ -407,8 +435,8 @@ hoge
 
 <NG>
 /* styleを当てる */
-.js-hoge{
- .......
+.js-hoge {
+  color: #000;
 }
 
 
@@ -472,11 +500,41 @@ hoge
 }
 ```
 
+***
+
 ## クラスの命名ルール
 
 - 参考にしたもの[CSSのクラス名を決めるときに使うリストをつくりました](https://qiita.com/manabuyasuda/items/dbb76ed36970bec95470)
 
 デザイン完成後
+
+***
+
+## sass(例)
+
+<h2 id="#prop_order_sass">プロパティの記述順序(sass)</h2>
+- `@include`などsass独特なプロパティ指定方法であっても、記述順序は統一する
+- その際プロパティの頭文字を見て判断すること。
+
+例)
+
+```
+<NG>
+.sample {
+  width: 300px;
+  @include font-size(12);
+  background: #000;
+}
+
+<OK>
+.sample {  
+  background: #000;
+  @include font-size(12);  
+  width: 300px;
+}
+```
+
+***
 
 <h2 id="var">定数の指定方法</h2>
 
