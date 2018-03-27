@@ -587,10 +587,10 @@
 - `left` 左側
 - `right` 右側
 - `center` 真ん中
-- `green` TRUNKカラー(グリーン)
-- 'blue' TRUNKカラー(ブルー)
-- 'navy' TRUNKカラー(ネイビー)
-- 'gray' TRUNKカラー(グレー)
+- `student` TRUNK学生側カラー(グリーン)
+- `firm` TRUNK企業側カラー(ブルー)
+- `navy` TRUNKネイビー(ネイビー)
+- `gray` TRUNKグレー(グレー)
 
  ***
 
