@@ -4,7 +4,7 @@
 - BEMとGoogleのルールに則る
 - BEMは色々なルールがあるが、TRUNKは公式に則る
 
-[BEM公式ドキュメント](https://en.bem.info/methodology/quick-start/#modifier) 
+[BEM公式ドキュメント](https://en.bem.info/methodology/quick-start/#modifier)
 [google公式翻訳](http://buchineko.website/google_styleguide_html/)
 
 参考
@@ -15,7 +15,7 @@
 - クラスは **ケバブケース** で書く
 例) `.block-name` `.block-name__element_modifier`
 
-- `block` は **小文字** 始まり 
+- `block` は **小文字** 始まり
 例) `.block`
 <br>
 
@@ -45,18 +45,18 @@
   1. [プロパティ終端のセミコロン](#prop_last)
   1. [プロパティ終端のスペース](#prop_last_space)
   1. [セレクタ終端のスペース](#selector_last_space)
-  
+
  ### その他指定
   1. [ショートハンドプロパティ](#short_hand)
   1. [小数点の頭の「0」](#decimal_point)
   1. [URI値の引用符](#url_quote)
-  1. [16進法のカラーコード](#HEX_color_code)         
+  1. [16進法のカラーコード](#HEX_color_code)
   1. [セレクタとプロパティの改行](#selector_prop_line)
   1. [タイプセレクタの指定方法](#type_selector)
   1. [コメントのルール](#comment)
   1. [borderの打ち消し](#border-none)
   1. [Jsで扱う要素](#js_css)
-  
+
  ### sass
   1. [プロパティの宣言順序](#prop_order_sass)
   1. [定数の指定方法](#var)
@@ -333,7 +333,7 @@
  ```
  <NG>
  ul#sample {
-   hoge... 
+   hoge...
  }
  div.sample {
    hoge...
@@ -402,7 +402,7 @@
  ***
 
  <h3 id="border_none">borderの打ち消し</h3>
- 
+
  - `border`を打ち消す場合は`none`ではなく、`0`を指定する。
  `none`は`border-style` `0`は`border-width`
  styleのinitial(初期値)はnoneですが、widthのinitial(初期値)はmediumであり`0`ではない。
@@ -475,7 +475,7 @@
  ***
 
  ## 擬似クラス(余白の指定)
- 
+
  - 原則`last-child`を使う。
  - 途中の要素を変更したい場合は`nth-of-type`と`nth-child`を使う
  - `nth-oy-type`と`nth-child`の違いは要素（p, a, liなど）を判別して数えるかどうか。
@@ -508,7 +508,89 @@
 
  - 参考にしたもの[CSSのクラス名を決めるときに使うリストをつくりました](https://qiita.com/manabuyasuda/items/dbb76ed36970bec95470)
 
- デザイン完成後
+### 比較
+
+- `student` 学生側にしかないもの
+- `global` 全体的に使うもの
+
+### pages(コンテンツ/ブロック)
+
+- `timeline` タイムライン
+- `training` トレーニング一覧
+- `training-detail` トレーニング詳細
+- `intern` インターン一覧
+- `intern-detail` インターン詳細
+- `dashbord` ダッシュボード
+- `job` 求人ページ
+- `mypage` レジュメ
+- `myproject` プロジェクト詳細
+- `chat` チャット画面
+- `home` トップページ
+- `announce` お知らせ画面
+- `form` プロフィール編集/プロジェクト登録/職歴登録・編集
+- `tutorial` チュートリアル画面
+- `student-firm` 学生側の企業一覧
+- `student-firm-detail` 学生側の企業詳細
+- `firm` 企業側ページ
+- `admin` 管理側ページ
+- `guide` ガイドページ
+
+### parts(コンテンツ/ブロック)
+
+- `button` ボタン
+- `icon-button` アイコン付きのボタン
+- `buttons` ボタンを囲むもの
+- `heading` 見出し・表題
+- `thumbnail` サムネイル
+- `sort` ソート部分(職種絞り込みなど)
+- `skilltag` スキルタグ
+- `circle` 円のアイコンなど
+- `icon` アイコン
+- `notification` 通知
+- `datetime` 日付日時
+- `pagenation` ページネーション
+- `logo` ロゴ
+- `tab` タブ
+- `link` リンク
+- `carousel` 画像などをスライドさせる部分
+- `banner` バナー
+- `text` テキスト
+
+### レイアウトパターン(partsを組み合わせて使うもの)
+- `imgaes` トレーニング画像やインターンの画像
+- `media` テキスト+画像
+- `card` コンテンツを囲むもの
+- `texts` テキストを囲むもの
+- `sns` snsをまとめるもの
+- `global-header` ヘッダー
+- `global-footer` フッター
+- `student-navigation` 学生側ナビゲーション
+- `breadcrumb` パンくずリスト
+
+### element
+
+- `inner` コンテンツを囲むもの
+- `head` コンテンツの上部
+- `foot` コンテンツの下部
+- `left` コンテンツの左側
+- `right` コンテンツの右側
+- `center` コンテンツ中央
+- `heading` コンテンツのタイトル
+- `items` リストを囲むもの
+- `item` リスト
+
+### modifier
+
+- `small` 小さい
+- `medium` 中間
+- `large` 大きい
+- `left` 左側
+- `right` 右側
+- `center` 真ん中
+- `green` TRUNKカラー(グリーン)
+- 'blue' TRUNKカラー(ブルー)
+- 'navy' TRUNKカラー(ネイビー)
+- 'gray' TRUNKカラー(グレー)
 
  ***
 
@@ -529,9 +611,9 @@
  }
 
  <OK>
- .sample {  
+ .sample {
    background: #000;
-   @include font-size(12);  
+   @include font-size(12);
    width: 300px;
  }
  ```
