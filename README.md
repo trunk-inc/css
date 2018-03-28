@@ -597,7 +597,7 @@ css:
 - `student` 学生側にしかないもの
 - `global` 全体的に使うもの
 
-### pages(コンテンツ/ブロック)
+### ブロック
 
 - `timeline` タイムライン
 - `training` トレーニング一覧
@@ -618,6 +618,10 @@ css:
 - `firm` 企業側ページ
 - `admin` 管理側ページ
 - `guide` ガイドページ
+- `container` pages/partsらを囲む
+- `sidebar` サイドバー
+- `pickup` 選び出す
+- `history` 更新履歴、沿革
 
 ### parts(コンテンツ/ブロック)
 
@@ -640,11 +644,10 @@ css:
 - `banner` バナー
 - `text` テキスト
 
-### レイアウトパターン(partsを組み合わせて使うもの)
+### (partsを組み合わせて使うもの)
 - `imgaes` トレーニング画像やインターンの画像
 - `media` テキスト+画像
-- `card` コンテンツを囲むもの
-- `texts` テキストを囲むもの
+- `card/area` レイアウトのためのボックス
 - `sns` snsをまとめるもの
 - `global-header` ヘッダー
 - `global-footer` フッター
@@ -662,6 +665,7 @@ css:
 - `heading` コンテンツのタイトル
 - `items` リストを囲むもの
 - `item` リスト
+- `texts` テキストを囲むもの
 
 ### modifier
 
@@ -675,6 +679,12 @@ css:
 - `firm` TRUNK企業側カラー(ブルー)
 - `navy` TRUNKネイビー(ネイビー)
 - `gray` TRUNKグレー(グレー)
+- `next` 次
+- `prev` 前
+- `more` もっと
+- `current` 現在位置
+- `hidden` 非表示
+- `visible` 表示
 
  ***
 
