@@ -56,6 +56,8 @@
   1. [コメントのルール](#comment)
   1. [borderの打ち消し](#border-none)
   1. [Jsで扱う要素](#js_css)
+  1. [擬似クラス指定](#pseudo)
+  1. [擬似クラス(余白の指定)](#pseudo_margin)
 
  ### sass
   1. [プロパティの宣言順序](#prop_order_sass)
@@ -424,31 +426,6 @@
 
  ***
  
-  <h3 id="border_none">擬似クラス指定</h3>
-
- - `content`プロパティのクォーテーションはシングルで指定
- - `before`,`after`を指定する場合は前に`&::`をつける
-
- 例)
-
- ```
- <NG>
- .sample {
-   &:after {
-     content: ="";
-   }
- }
-
- <OK>
- .sample {
-   &::after {
-     content: ='';
-   }
- }
- ```
-
- ***
-
  <h3 id="js_css">Jsで扱う要素</h3>
 
  - jsでアニメーションをさせたり、jsで扱う部分は文頭に「js-」をつける
@@ -471,10 +448,8 @@
  #js-hogehoge
  ```
 
-
  ***
-
-
+ 
  <h3 id="margin">余白のルール</h3>
 
  - 外に余白をつけるときは、marginをつける
@@ -498,8 +473,33 @@
  ```
 
  ***
+ 
+  <h3 id="pseudo">擬似クラス指定</h3>
 
- ## 擬似クラス(余白の指定)
+ - `content`プロパティのクォーテーションはシングルで指定
+ - `before`,`after`を指定する場合は前に`&::`をつける
+
+ 例)
+
+ ```
+ <NG>
+ .sample {
+   &:after {
+     content: ="";
+   }
+ }
+
+ <OK>
+ .sample {
+   &::after {
+     content: ='';
+   }
+ }
+ ```
+
+ ***
+ 
+ <h3 id="pseudo_margin">擬似クラス(余白の指定)</h3>
 
  - 原則`last-child`を使う。
  - 途中の要素を変更したい場合は`nth-of-type`と`nth-child`を使う
