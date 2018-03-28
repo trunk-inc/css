@@ -3,6 +3,12 @@
 ## 概要
 - BEMとGoogleのルールに則る
 - BEMは色々なルールがあるが、TRUNKは公式に則る
+- cssはcss3に対応する
+- 文字コードはUTF-8
+- cssはscssで書く
+- application.scssをベースに各scssをimportする
+- HTML(slim)には、application.cssを読み込む
+- csslintを導入する lintで弾かれた場合修正すること
 
 [BEM公式ドキュメント](https://en.bem.info/methodology/quick-start/#modifier)
 [google公式翻訳](http://buchineko.website/google_styleguide_html/)
@@ -28,7 +34,8 @@
 <br>
 
 ## フォーマット
-- cssはscssで書く
+- 基本的にインライン(slim)には記述せず、css(scss)ファイルに書く。
+- ディレクトリ/ファイルの命名規則
 - インデントは２スペース
 - プロパティの記述順序はABC順に
 - ブロック単位のインデント
@@ -40,6 +47,8 @@
 ## 例
 
  ### フォーマット
+  1. [ディレクトリ/ファイルの命名規則](#dir_file)
+  1. [インラインでは基本的に記述しない](#inline)
   1. [プロパティの記述順序](#prop_order)
   1. [ブロック単位のインデント](#block_indent)
   1. [プロパティ終端のセミコロン](#prop_last)
@@ -72,6 +81,56 @@
 ***
 
 ## フォーマット(例)
+
+<h3 id="prop_order">ディレクトリ/ファイルの命名規則</h3>
+
+- ディレクトリ/ファイル名は、原則小文字で付ける
+- 複数単語の場合は、`_`で区切る
+- 文頭に特殊文字、数字はつけない
+- application.scss(エントリーポイント)以外のscssファイルの文頭には `_` をつけてコンパイルしないようにする
+
+例)
+
+```
+<NG>
+`Sample.scss`
+`sample-sample.scss`
+`!sample.scss / 19sample.scss`
+
+<OK>
+`_sample.scss`
+`_sample_sapmle.scss`
+'_sample_01.scss'
+
+```
+
+***
+
+<h3 id="inline">基本的にインラインでは記述しない</h3>
+
+- cssはインライン(slim)内には原則記述しない
+- ただし裏側の処理の部分で必要な場合は可
+
+例)
+
+```
+<NG>
+
+.sample
+css:
+  .sample {
+    width: 300px;
+  }
+
+.sample style="position: absolute;"
+
+<OK>
+- @hogehoge.each do |hogehoge|
+  .sample style="background-image:url(#{hogehoge.image.hogehoge});"
+
+```
+
+***
 
  <h3 id="prop_order">プロパティ記述順序</h3>
 
@@ -425,7 +484,7 @@
  ```
 
  ***
- 
+
  <h3 id="js_css">Jsで扱う要素</h3>
 
  - jsでアニメーションをさせたり、jsで扱う部分は文頭に「js-」をつける
@@ -449,7 +508,7 @@
  ```
 
  ***
- 
+
  <h3 id="margin">余白のルール</h3>
 
  - 外に余白をつけるときは、marginをつける
@@ -473,7 +532,7 @@
  ```
 
  ***
- 
+
   <h3 id="pseudo">擬似クラス指定</h3>
 
  - `content`プロパティのクォーテーションはシングルで指定
@@ -498,7 +557,7 @@
  ```
 
  ***
- 
+
  <h3 id="pseudo_margin">擬似クラス(余白の指定)</h3>
 
  - 原則`last-child`を使う。
