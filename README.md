@@ -423,6 +423,31 @@
  ```
 
  ***
+ 
+  <h3 id="border_none">擬似クラス指定</h3>
+
+ - `content`プロパティのクォーテーションはシングルで指定
+ - `before`,`after`を指定する場合は前に`&::`をつける
+
+ 例)
+
+ ```
+ <NG>
+ .sample {
+   &:after {
+     content: ="";
+   }
+ }
+
+ <OK>
+ .sample {
+   &::after {
+     content: ='';
+   }
+ }
+ ```
+
+ ***
 
  <h3 id="js_css">Jsで扱う要素</h3>
 
