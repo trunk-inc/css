@@ -591,13 +591,35 @@ css:
  ## クラスの命名ルール
 
  - 参考にしたもの[CSSのクラス名を決めるときに使うリストをつくりました](https://qiita.com/manabuyasuda/items/dbb76ed36970bec95470)
+ - クラス名は「何処で」「何を表現」するのかを端的な名前で表す。
+
+例)
+
+```
+<NG>
+青色のコメント → .blue
+右寄せのブロック → .right
+
+<OK>
+青色のコメント → `.comment.comment_blue or`
+右寄せのブロック → .area.area_right
+```
+
+ - 「構造の意味の判斷がつかないもの」「構造の意味がないもの」に関しては汎用的なクラスを付ける。
+
+ 例)
+
+ ```
+ ２カラムのレイアウト → .area .area__two-column
+ ３カラムのレイアウト > .area__three-column
+ ```
 
 ### 比較
 
 - `student` 学生側にしかないもの
 - `global` 全体的に使うもの
 
-### ブロック
+### pages
 
 - `timeline` タイムライン
 - `training` トレーニング一覧
@@ -618,12 +640,8 @@ css:
 - `firm` 企業側ページ
 - `admin` 管理側ページ
 - `guide` ガイドページ
-- `container` pages/partsらを囲む
-- `sidebar` サイドバー
-- `pickup` 選び出す
-- `history` 更新履歴、沿革
 
-### parts(コンテンツ/ブロック)
+### modules
 
 - `button` ボタン
 - `icon-button` アイコン付きのボタン
@@ -643,8 +661,11 @@ css:
 - `carousel` 画像などをスライドさせる部分
 - `banner` バナー
 - `text` テキスト
+- `container` pages/partsらを囲む
+- `sidebar` サイドバー
+- `pickup` 選び出す
+- `history` 更新履歴、沿革
 
-### (partsを組み合わせて使うもの)
 - `imgaes` トレーニング画像やインターンの画像
 - `media` テキスト+画像
 - `card/area` レイアウトのためのボックス
