@@ -67,6 +67,7 @@
   1. [Jsで扱う要素](#js_css)
   1. [擬似クラス指定](#pseudo)
   1. [擬似クラス(余白の指定)](#pseudo_margin)
+  1  [clean-import-paths](#import)
 
  ### sass
   1. [プロパティの宣言順序](#prop_order_sass)
@@ -708,6 +709,37 @@ css:
 - `visible` 表示
 
  ***
+ 
+ <h3 id="import">clean-import-paths</h3>
+
+ - importするファイル名にアンダースコアをつけない
+ - importするファイルの拡張子をつけるか
+ 
+ 例) importするファイルの拡張子をつけるか
+
+```
+<NG>
+@import 'sample.scss';
+@import 'icon/sample.scss';
+
+<OK>
+@import 'sample';
+@import 'icon/sample';
+```
+
+ 例) importするファイル名にアンダースコアをつけない
+ 
+ ```
+ <NG>
+@import '_sample';
+@import '_icon/_sample';
+
+ <OK>
+@import 'sample';
+@import 'icon/sample';
+ ```
+ 
+  ***
 
 ## sass(例)
 
