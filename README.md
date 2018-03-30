@@ -46,7 +46,7 @@
 
 ## 例
 
- ### フォーマット
+ ### フォーマット(lintでチェック)
   1. [ディレクトリ/ファイルの命名規則](#dir_file)
   1. [インラインでは基本的に記述しない](#inline)
   1. [プロパティの記述順序](#prop_order)
@@ -54,8 +54,6 @@
   1. [プロパティ終端のセミコロン](#prop_last)
   1. [プロパティ終端のスペース](#prop_last_space)
   1. [セレクタ終端のスペース](#selector_last_space)
-
- ### その他指定
   1. [ショートハンドプロパティ](#short_hand)
   1. [小数点の頭の「0」](#decimal_point)
   1. [URI値の引用符](#url_quote)
@@ -67,10 +65,13 @@
   1. [Jsで扱う要素](#js_css)
   1. [擬似クラス指定](#pseudo)
   1. [擬似クラス(余白の指定)](#pseudo_margin)
-  1  [clean-import-paths](#import)
+  1  [インポート](#import)
+  1. [before-nesting](#nesting)
+  1. [属性セレクタのネスト] (#force_attribute_nesting)
+  1. [ネスト時の行間](#empty_line_between_blocks)
 
- ### sass
-  1. [プロパティの宣言順序](#prop_order_sass)
+ ### 守ってほしいルール
+  1. [プロパティの宣言順序](#prop_order_sass)
   1. [定数の指定方法](#var)
   1. [メディアクエリ](#media)
   1. [font-size指定](#font_size)
@@ -710,7 +711,7 @@ css:
 
  ***
  
-<h3 id="import">clean-import-paths</h3>
+<h3 id="import">import</h3>
 
 - importするファイル名にアンダースコアをつけない
 - importするファイルの拡張子をつけるか
@@ -741,7 +742,7 @@ css:
  
 ***
 
-<h3 id="nesting">declarations-before-nesting</h3>
+<h3 id="nesting">before-nesting</h3>
 
 - 親クラスのスタイルをネストしたエレメントの後に書かない
 
@@ -765,6 +766,62 @@ css:
 }
  ```
  
+***
+
+<h3 id="force_attribute_nesting">属性セレクタのネスト</h3>
+
+- 属性セレクタを続けて記述する場合はネストする
+
+例)
+
+```
+<NG>
+input[type='text'] {
+  width: 1059px;
+}
+
+// OK
+input {
+  &[type='text'] {
+    width: 1059px;
+  }
+}
+```
+
+***
+
+<h3 id="empty_line_between_blocks">ネスト時の行間</h3>
+
+- ネストした時に各セレクタの上の行を1行空ける
+
+例)
+
+```
+<NG>
+.sample {
+  width: 1059px
+
+  &__sample {
+    width: 1059px
+
+    &_sample {
+      width: 1059px
+    }
+  }
+}
+
+<OK>
+.sample {
+  width: 1059px
+  &__sample {
+    width: 1059px
+    &_sample {
+      width: 1059px
+    }
+  }
+}
+```
+
 ***
 
 ## sass(例)
