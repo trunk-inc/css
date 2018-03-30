@@ -710,12 +710,12 @@ css:
 
  ***
  
- <h3 id="import">clean-import-paths</h3>
+<h3 id="import">clean-import-paths</h3>
 
- - importするファイル名にアンダースコアをつけない
- - importするファイルの拡張子をつけるか
+- importするファイル名にアンダースコアをつけない
+- importするファイルの拡張子をつけるか
  
- 例) importするファイルの拡張子をつけるか
+例) importするファイルの拡張子をつけるか
 
 ```
 <NG>
@@ -739,7 +739,33 @@ css:
 @import 'icon/sample';
  ```
  
-  ***
+***
+
+<h3 id="nesting">declarations-before-nesting</h3>
+
+- 親クラスのスタイルをネストしたエレメントの後に書かない
+
+ ```
+ <NG>
+.sample {  
+  &__sample {
+    width: 300px;
+  }
+  
+  width: 300px;
+}
+
+ <OK>
+.sample {
+  width: 300px;
+  
+  &__sample {
+    width: 300px;
+  }
+}
+ ```
+ 
+***
 
 ## sass(例)
 
