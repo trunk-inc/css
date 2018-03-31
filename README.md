@@ -8,7 +8,7 @@
 - cssはscssで書く
 - application.scssをベースに各scssをimportする
 - HTML(slim)には、application.cssを読み込む
-- csslintを導入する lintで弾かれた場合修正すること
+- sass-lintを導入する lintで弾かれた場合修正すること
 
 [BEM公式ドキュメント](https://en.bem.info/methodology/quick-start/#modifier)
 [google公式翻訳](http://buchineko.website/google_styleguide_html/)
@@ -33,10 +33,23 @@
 例) `.block-name__element_modifier`
 <br>
 
+## プルリク前のフロー
+
+1. ガイドラインに沿ってコーディング
+2. `sass-lint`を通す
+3. `守ってほしいルール`を守れているのか確認
+4. プルリクを出す
+
+## `sass-lint`のやり方
+
+`yarn sass-lint`を叩く
+問題なければ、`Done`と表示される。
+失敗すればどの部分がおかしいか指摘さてるので、その部分を直すこと。
+
+
 ## フォーマット
 
  ### フォーマット(lintでチェック)
-  1. [ディレクトリ/ファイルの命名規則](#dir_file)
   1. [インラインでは基本的に記述しない](#inline)
   1. [プロパティの記述順序](#prop_order)
   1. [ブロック単位のインデント](#block_indent)
@@ -46,7 +59,6 @@
   1. [演算子前後のスペース](#space_around_operator)
   1. [カンマ後スペース](#space_after_comma)
   1. [空のセット](#no_empty_rulesets)
-  1. [ショートハンドプロパティ](#short_hand)
   1. [小数点の頭の「0」](#decimal_point)
   1. [URL値の引用符](#url_quote)
   1. [16進法のカラーコード](#HEX_color_code)
@@ -55,55 +67,32 @@
   1. [タイプセレクタの指定方法](#type_selector)
   1. [コメントのルール](#comment)
   1. [borderの打ち消し](#border-none)
-  1. [Jsで扱う要素](#js_css)
   1. [擬似クラス指定](#pseudo)
   1. [擬似クラス(余白の指定)](#pseudo_margin)
   1. [インポート](#import)
   1. [before-nesting](#nesting)
-  1. [属性セレクタのネスト] (#force_attribute_nesting)
+  1. [属性セレクタのネスト](#force_attribute_nesting)
   1. [セレクタ後ろ要素のネスト](#force_element_nesting)
   1. [ネスト時の行間](#empty_line_between_blocks)
   1. [子孫セレクタ/隣接セレクタ](#no_combinators)
   1. [スタイルでのimportant禁止](#no_important)
 
  ### 守ってほしいルール
+
   - 基本的にインライン(slim)には記述せず、css(scss)ファイルに書く。
+
+  1. [ディレクトリ/ファイルの命名規則](#dir_file)
   1. [プロパティの宣言順序](#prop_order_sass)
   1. [定数の指定方法](#var)
   1. [メディアクエリ](#media)
   1. [font-size指定](#font_size)
   1. [余白のルール](#margin)
-
-<h3 id="validate">CSSバリデート</h3>
-- 正確なcssなのか検証するため、[W3C CSS Validator](http://jigsaw.w3.org/css-validator/)でチェックする。
+  1. [Jsで扱う要素](#js_css)
+  1. [ショートハンドプロパティ](#short_hand)
 
 ***
 
 ## フォーマット
-
-<h3 id="prop_order">ディレクトリ/ファイルの命名規則</h3>
-
-- ディレクトリ/ファイル名は、原則小文字で付ける
-- 複数単語の場合は、`_`で区切る
-- 文頭に特殊文字、数字はつけない
-- application.scss(エントリーポイント)以外のscssファイルの文頭には `_` をつけてコンパイルしないようにする
-
-例)
-
-```
-<NG>
-`Sample.scss`
-`sample-sample.scss`
-`!sample.scss / 19sample.scss`
-
-<OK>
-`_sample.scss`
-`_sample_sapmle.scss`
-'_sample_01.scss'
-
-```
-
-***
 
 <h3 id="inline">基本的にインラインでは記述しない</h3>
 
@@ -118,10 +107,10 @@
 .sample
 css:
   .sample {
-    width: 300px;
+    width: 1059px;
   }
 
-.sample style="position: absolute;"
+.sample style="width: 1059px;"
 
 <OK>
 - @hogehoge.each do |hogehoge|
@@ -130,33 +119,6 @@ css:
 ```
 
 ***
-
- <h3 id="prop_order">プロパティ記述順序</h3>
-
- - アルファベットの順に記述。ベンダープレフィックスは無視すること。ただし、例えば-moz接頭辞は-webkitの前に来る、などの順序は保つ。
-
- 例)
-
- ```
- <NG>
- width: 1059px;
- border: 1px solid;
- -moz-border-radius: 4px;
- color: black;
- text-align: center;
- -webkit-border-radius: 4px;
-
- <OK>
- border: 1px solid;
- -moz-border-radius: 4px;
- -webkit-border-radius: 4px;
- border-radius: 4px;
- color: black;
- text-align: center;
- width: 1059px;
- ```
-
- ***
 
  <h3 id="block_indent">ブロック単位のインデント</h3>
 
@@ -317,25 +279,6 @@ css:
 
  ***
 
- <h3 id="short_hand">ショートハンドプロパティ</h3>
-
- - 同じプロパティが複数ある場合はショートハンドを使う。
- - 要注意なプロパティ `background`,`border`,`font`,`margin`,`padding`
-
- 例)
- ```
- <NG>
- padding-bottom: 2rem;
- padding-left: 1rem;
- padding-right: 1rem;
- padding-top: 0;
-
- <OK>
- padding: 0 1rem 2rem;
- ```
-
- ***
-
  <h3 id="#decimal_point">小数点の「0」を省略/単位の表記</h3>
 
  - 小数点の頭の「0」は省略する。
@@ -379,7 +322,8 @@ css:
 
  <h3 id="url_quote">URL値の引用符</h3>
 
- - url()での指定において、""（ダブルコーテーション）や''（シングルコーテーション）などのURI値の引用符を省略すること。
+ - lint `url-quotes`
+ - url()での指定において、""（クォーテーション）や''（シングルクォーテーション）などのURI値の引用符を省略すること。
 
  例)
  ```
@@ -573,55 +517,7 @@ css:
 
  ***
 
- <h3 id="js_css">Jsで扱う要素</h3>
-
- - jsでアニメーションをさせたり、jsで扱う部分は文頭に「js-」をつける
- - 「js-」をつけていない要素はjsで扱わない。
- - 「js-」のclassにstyleは記述しない。トリガーとしてだけ使う
-
- 例)
-
- ```
-
- <NG>
- /* styleを当てる */
- .js-hoge {
-   color: #000;
- }
-
-
- <OK>
- .js-hogehoge
- #js-hogehoge
- ```
-
- ***
-
- <h3 id="margin">余白のルール</h3>
-
- - 外に余白をつけるときは、marginをつける
- - marginは原則下方向`margin-bottom`をつける / 横方向は`margin-right`をつける
-
- 例)
- ```
- <NG>
- .sample {
-   margin: 20px 0 0 20px;
-   or
-   margin-right: 20px;
- }
-
- <OK>
- .sample {
-   margin: 0 20px 20px 0;
-   or
-   margin-right: 20px;
- }
- ```
-
- ***
-
-  <h3 id="pseudo">擬似クラス指定</h3>
+<h3 id="pseudo">擬似クラス指定</h3>
 
  - `content`プロパティのクォーテーションはシングルで指定
  - `before`,`after`を指定する場合は前に`&::`をつける
@@ -987,6 +883,33 @@ p > .sample {
 
 ## 守ってほしいルール
 
+<h3 id="prop_order">プロパティ記述順序</h3>
+
+- アルファベットの順に記述。ベンダープレフィックスは無視すること。ただし、例えば-moz接頭辞は-webkitの前に来る、などの順序は保つ。
+
+例)
+
+```
+<NG>
+width: 1059px;
+border: 1px solid;
+-moz-border-radius: 4px;
+color: black;
+text-align: center;
+-webkit-border-radius: 4px;
+
+<OK>
+border: 1px solid;
+-moz-border-radius: 4px;
+-webkit-border-radius: 4px;
+border-radius: 4px;
+color: black;
+text-align: center;
+width: 1059px;
+```
+
+***
+
  <h3 id="#prop_order_sass">プロパティの記述順序(sass)</h3>
  - `@include`などsass独特なプロパティ指定方法であっても、記述順序は統一する
  - その際プロパティの頭文字を見て判断すること。
@@ -1092,6 +1015,97 @@ p > .sample {
  .sample {
    @include font-size(12);
  }
+ ```
+
+ ***
+
+ <h3 id="margin">余白のルール</h3>
+
+ - 外に余白をつけるときは、marginをつける
+ - marginは原則下方向`margin-bottom`をつける / 横方向は`margin-right`をつける
+
+ 例)
+ ```
+ <NG>
+ .sample {
+   margin: 20px 0 0 20px;
+   or
+   margin-right: 20px;
+ }
+
+ <OK>
+ .sample {
+   margin: 0 20px 20px 0;
+   or
+   margin-right: 20px;
+ }
+ ```
+
+ ***
+
+ <h3 id="js_css">Jsで扱う要素</h3>
+
+ - jsでアニメーションをさせたり、jsで扱う部分は文頭に「js-」をつける
+ - 「js-」をつけていない要素はjsで扱わない。
+ - 「js-」のclassにstyleは記述しない。トリガーとしてだけ使う
+
+ 例)
+
+ ```
+
+ <NG>
+ /* styleを当てる */
+ .js-hoge {
+   color: #000;
+ }
+
+
+ <OK>
+ .js-hogehoge
+ #js-hogehoge
+ ```
+
+ ***
+
+ <h3 id="short_hand">ショートハンドプロパティ</h3>
+
+ - 同じプロパティが複数ある場合はショートハンドを使う。
+ - 要注意なプロパティ `background`,`border`,`font`,`margin`,`padding`
+
+ 例)
+ ```
+ <NG>
+ padding-bottom: 2rem;
+ padding-left: 1rem;
+ padding-right: 1rem;
+ padding-top: 0;
+
+ <OK>
+ padding: 0 1rem 2rem;
+ ```
+
+ ***
+
+ <h3 id="prop_order">ディレクトリ/ファイルの命名規則</h3>
+
+ - ディレクトリ/ファイル名は、原則小文字で付ける
+ - 複数単語の場合は、`_`で区切る
+ - 文頭に特殊文字、数字はつけない
+ - application.scss(エントリーポイント)以外のscssファイルの文頭には `_` をつけてコンパイルしないようにする
+
+ 例)
+
+ ```
+ <NG>
+ `Sample.scss`
+ `sample-sample.scss`
+ `!sample.scss / 19sample.scss`
+
+ <OK>
+ `_sample.scss`
+ `_sample_sapmle.scss`
+ '_sample_01.scss'
+
  ```
 
  ***
