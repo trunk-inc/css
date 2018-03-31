@@ -34,17 +34,6 @@
 <br>
 
 ## フォーマット
-- 基本的にインライン(slim)には記述せず、css(scss)ファイルに書く。
-- ディレクトリ/ファイルの命名規則
-- インデントは２スペース
-- プロパティの記述順序はABC順に
-- ブロック単位のインデント
-- プロパティ終端のセミコロンをつける
-- プロパティ終端のスペースを入れる
-- セレクタ終端のスペースを入れる
-- cssにおいて`id`は使わない(jsのフックとして使用する場合は可)
-
-## 例
 
  ### フォーマット(lintでチェック)
   1. [ディレクトリ/ファイルの命名規則](#dir_file)
@@ -54,10 +43,14 @@
   1. [プロパティ終端のセミコロン](#prop_last)
   1. [プロパティ終端のスペース](#prop_last_space)
   1. [セレクタ終端のスペース](#selector_last_space)
+  1. [演算子前後のスペース](#space_around_operator)
+  1. [カンマ後スペース](#space_after_comma)
+  1. [空のセット](#no_empty_rulesets)
   1. [ショートハンドプロパティ](#short_hand)
   1. [小数点の頭の「0」](#decimal_point)
-  1. [URI値の引用符](#url_quote)
+  1. [URL値の引用符](#url_quote)
   1. [16進法のカラーコード](#HEX_color_code)
+  1. [キーワードカラー](#no_color_keyword)
   1. [セレクタとプロパティの改行](#selector_prop_line)
   1. [タイプセレクタの指定方法](#type_selector)
   1. [コメントのルール](#comment)
@@ -65,12 +58,16 @@
   1. [Jsで扱う要素](#js_css)
   1. [擬似クラス指定](#pseudo)
   1. [擬似クラス(余白の指定)](#pseudo_margin)
-  1  [インポート](#import)
+  1. [インポート](#import)
   1. [before-nesting](#nesting)
   1. [属性セレクタのネスト] (#force_attribute_nesting)
+  1. [セレクタ後ろ要素のネスト](#force_element_nesting)
   1. [ネスト時の行間](#empty_line_between_blocks)
+  1. [子孫セレクタ/隣接セレクタ](#no_combinators)
+  1. [スタイルでのimportant禁止](#no_important)
 
  ### 守ってほしいルール
+  - 基本的にインライン(slim)には記述せず、css(scss)ファイルに書く。
   1. [プロパティの宣言順序](#prop_order_sass)
   1. [定数の指定方法](#var)
   1. [メディアクエリ](#media)
@@ -82,7 +79,7 @@
 
 ***
 
-## フォーマット(例)
+## フォーマット
 
 <h3 id="prop_order">ディレクトリ/ファイルの命名規則</h3>
 
@@ -189,6 +186,7 @@ css:
 
  <h3 id="prop_last">プロパティ終端のセミコロン</h3>
 
+ - lint名 `trailing-semicolon`
  - すべてのプロパティの終端はセミコロンを書くこと。
 
  例)
@@ -258,7 +256,66 @@ css:
 
  ***
 
-## その他指定(例)
+ <h3 id="space_after_comma">カンマ後スペース</h3>
+
+ - lint名 `space-after-comma`
+ - カンマ（,）のあとのスペースを入れる
+
+ 例)
+
+ ```
+ <NG>
+ .sample {
+   box-shadow: 1px 1px $COLOR_MAIN,1px 1px $COLOR_MAIN;
+ }
+
+ <OK>
+ .sample {
+   box-shadow: 1px 1px $COLOR_MAIN, 1px 1px $COLOR_MAIN;
+ }
+
+ ```
+
+ ***
+
+ <h3 id="space_around_operator">演算子前後のスペース</h3>
+
+ - lint名 `space-around-operator`
+ - 演算子（+, -, /, *, %, <, > ==, !=, <=, >=）の前後のスペースを入れる
+
+ 例)
+
+ ```
+ <NG>
+ .sample {
+   width: 1000px+59px;
+ }
+
+ <OK>
+ .sample {
+   width: 1000px + 59px;
+ }
+
+ ```
+
+ ***
+
+ <h3 id="no_empty_rulesets">空のセット</h3>
+
+- lint名 `no-empty-rulesets`
+- 空のスタイルセットはNG
+
+ 例)
+
+ ```
+ <NG>
+ .sample {
+
+ }
+
+ ```
+
+ ***
 
  <h3 id="short_hand">ショートハンドプロパティ</h3>
 
@@ -283,28 +340,39 @@ css:
 
  - 小数点の頭の「0」は省略する。
  - 値が0の場合は単位を省略する。
+ - 小数点以下の末尾の0は許可しない
 
  例)
  ```
  /* 小数点を省略 */
  <NG>
- font-size: 0.8rem;
- opacity: 0.5;
- transition all 0.2s;
+ .sample {
+   font-size: 0.8rem;
+   opacity: 0.5;
+   transition all 0.2s;
+   width: 1059.0px;
+ }
 
  <OK>
- font-size: .8rem;
- opacity: .5;
- transition all .2s;
+ .sample {
+   font-size: .8rem;
+   opacity: .5;
+   transition all .2s;
+   width: 1059px;
+ }
 
  /* 単位を省略 */
  <NG>
- margin: 0px;
- padding: 0px;
+ .sample {
+   margin: 0px;
+   padding: 0px;
+ }
 
  <OK>
- margin: 0;
- padding: 0;
+ .sample {
+   margin: 0;
+   padding: 0;
+ }
  ```
 
  ***
@@ -326,6 +394,7 @@ css:
 
  <h3 id="HEX_color_code">16進法カラーコード</h3>
 
+ - lint名 `hex-length`
  - 16進法形式のカラーコードで3文字で表記できるものは3文字で。
 
  例)
@@ -336,6 +405,23 @@ css:
 
  <OK>
  color: #ebc;
+ ```
+
+ ***
+
+ <h3 id="no_color_keyword">キーワードカラー</h3>
+
+ - lint名 `no-color-keywords`
+ - キーワードでカラーを指定しない
+
+ 例)
+
+ ```
+ <NG>
+ background-color: red;
+
+ <OK>
+ background-color: $COLOR_RED
  ```
 
  ***
@@ -539,6 +625,7 @@ css:
 
  - `content`プロパティのクォーテーションはシングルで指定
  - `before`,`after`を指定する場合は前に`&::`をつける
+ - スタイルをつけるときはネストする
 
  例)
 
@@ -547,6 +634,12 @@ css:
  .sample {
    &:after {
      content: ="";
+   }
+ }
+
+ .sample {
+   sample ::after {
+     width: 1059px;
    }
  }
 
@@ -710,12 +803,12 @@ css:
 - `visible` 表示
 
  ***
- 
+
 <h3 id="import">import</h3>
 
 - importするファイル名にアンダースコアをつけない
 - importするファイルの拡張子をつけるか
- 
+
 例) importするファイルの拡張子をつけるか
 
 ```
@@ -729,7 +822,7 @@ css:
 ```
 
  例) importするファイル名にアンダースコアをつけない
- 
+
  ```
  <NG>
 @import '_sample';
@@ -739,7 +832,7 @@ css:
 @import 'sample';
 @import 'icon/sample';
  ```
- 
+
 ***
 
 <h3 id="nesting">before-nesting</h3>
@@ -748,28 +841,29 @@ css:
 
  ```
  <NG>
-.sample {  
+.sample {
   &__sample {
     width: 300px;
   }
-  
+
   width: 300px;
 }
 
  <OK>
 .sample {
   width: 300px;
-  
+
   &__sample {
     width: 300px;
   }
 }
  ```
- 
+
 ***
 
 <h3 id="force_attribute_nesting">属性セレクタのネスト</h3>
 
+- lint名 `force-attribute-nesting`
 - 属性セレクタを続けて記述する場合はネストする
 
 例)
@@ -783,6 +877,29 @@ input[type='text'] {
 // OK
 input {
   &[type='text'] {
+    width: 1059px;
+  }
+}
+```
+
+***
+
+<h3 id="force_element_nesting">セレクタ後ろ要素のネスト</h3>
+
+- セレクタの後ろに続く要素は入れ子にする
+- lint名 `force_element_nesting`
+
+例)
+
+```
+<NG>
+.sample p {
+  width: 1059px;
+}
+
+<OK>
+.sample {
+  p {
     width: 1059px;
   }
 }
@@ -824,7 +941,51 @@ input {
 
 ***
 
-## sass(例)
+<h3 id="empty_line_between_blocks">子孫、隣接セレクタ</h3>
+
+- lint名 `no-combinators`
+- 原則子孫、隣接セレクタを使用しない
+- ただし、hover時のアニメーションなどで利用する場合は可(デザイナーと要相談)
+
+例)
+
+```
+<NG>
+p > .sample {
+  width: 1059px;
+}
+
+.foo .bar {
+  content: 'qux';
+}
+
+.foo {
+  > .bar {
+    content: 'foo';
+  }
+}
+```
+
+***
+
+<h3 id="no_important">スタイルでのimportant禁止</h3>
+
+- lint名 `no-important`
+- 強制的に上書きなどをする`important`は禁止
+- jQueryなどのプラグインをいじらざる得ないときは要相談
+
+例)
+
+```
+<NG>
+.sample {
+  width: 1059px !important;
+}
+```
+
+***
+
+## 守ってほしいルール
 
  <h3 id="#prop_order_sass">プロパティの記述順序(sass)</h3>
  - `@include`などsass独特なプロパティ指定方法であっても、記述順序は統一する
