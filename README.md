@@ -4,10 +4,7 @@
 - BEMとGoogleのルールに則る
 - BEMは色々なルールがあるが、TRUNKは公式に則る
 - cssはcss3に対応する
-- 文字コードはUTF-8
 - cssはscssで書く
-- application.scssをベースに各scssをimportする
-- HTML(slim)には、application.cssを読み込む
 - sass-lintを導入する lintで弾かれた場合修正すること
 
 [BEM公式ドキュメント](https://en.bem.info/methodology/quick-start/#modifier)
@@ -33,12 +30,19 @@
 例) `.block-name__element_modifier`
 <br>
 
-## プルリク前のフロー
+## 制作フロー
 
-1. ガイドラインに沿ってコーディング
-2. `sass-lint`を通す
-3. `守ってほしいルール`を守れているのか確認
-4. プルリクを出す
+### Prを出すまでの流れ(作業者)
+
+1. ガイドラインに沿ってコーディングする
+1. 作業後必ず`sass-lint`を通す
+1. `守ってほしいルール`を守れているのか確認する
+1. 通ればPrを出す
+
+### Prレビューチェック(管理者)
+
+1. `sass-lint`が通っている前提なので`守ってほしいルール`が本当に守られているのか確認s
+
 
 ## `sass-lint`のやり方
 
@@ -79,8 +83,7 @@
 
  ### 守ってほしいルール
 
-  - 基本的にインライン(slim)には記述せず、css(scss)ファイルに書く。
-
+  1. 基本的にインライン(slim)には記述せず、css(scss)ファイルに書く。
   1. [ディレクトリ/ファイルの命名規則](#dir_file)
   1. [プロパティの宣言順序](#prop_order_sass)
   1. [定数の指定方法](#var)
@@ -1070,7 +1073,7 @@ width: 1059px;
  <h3 id="short_hand">ショートハンドプロパティ</h3>
 
  - 同じプロパティが複数ある場合はショートハンドを使う。
- - 要注意なプロパティ `background`,`border`,`font`,`margin`,`padding`
+ - 要注意なプロパティ `background`,`border`,`margin`,`padding`
 
  例)
  ```
