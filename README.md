@@ -686,6 +686,8 @@ css:
 - `items` リストを囲むもの
 - `item` リスト
 - `texts` テキストを囲むもの
+- `success` 完了時
+- `label` ラベル
 
 ### modifier
 
@@ -705,6 +707,11 @@ css:
 - `current` 現在位置
 - `hidden` 非表示
 - `visible` 表示
+- `success` 完了時
+- `notice` 通知
+- `wanted` 募集
+- `full` 満員
+- `slightly` わずか(残数)
 
  ***
 
@@ -821,10 +828,8 @@ input {
 <NG>
 .sample {
   width: 1059px
-
   &__sample {
     width: 1059px
-
     &_sample {
       width: 1059px
     }
@@ -834,8 +839,10 @@ input {
 <OK>
 .sample {
   width: 1059px
+
   &__sample {
     width: 1059px
+
     &_sample {
       width: 1059px
     }
