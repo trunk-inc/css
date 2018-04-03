@@ -41,7 +41,7 @@
 
 ### Prレビューチェック(管理者)
 
-1. `sass-lint`が通っている前提なので`守ってほしいルール`が本当に守られているのか確認s
+1. `sass-lint`が通っている前提なので`守ってほしいルール`が本当に守られているのか確認
 
 
 ## sass-lintのやり方
@@ -99,6 +99,235 @@
   1. [ショートハンドプロパティ](#short_hand)
 
 ***
+
+## 守ってほしいルール
+
+<h3 id="prop_order">プロパティ記述順序</h3>
+
+- アルファベットの順に記述。ベンダープレフィックスは無視すること。ただし、例えば-moz接頭辞は-webkitの前に来る、などの順序は保つ。
+
+例)
+
+```
+<NG>
+width: 1059px;
+border: 1px solid;
+-moz-border-radius: 4px;
+color: black;
+text-align: center;
+-webkit-border-radius: 4px;
+
+<OK>
+border: 1px solid;
+-moz-border-radius: 4px;
+-webkit-border-radius: 4px;
+border-radius: 4px;
+color: black;
+text-align: center;
+width: 1059px;
+```
+
+***
+
+ <h3 id="#prop_order_sass">プロパティの記述順序(sass)</h3>
+ - `@include`などsass独特なプロパティ指定方法であっても、記述順序は統一する
+ - その際プロパティの頭文字を見て判断すること。
+
+ 例)
+
+ ```
+ <NG>
+ .sample {
+   width: 300px;
+   @include font-size(12);
+   background: #000;
+ }
+
+ <OK>
+ .sample {
+   background: #000;
+   @include font-size(12);
+   width: 300px;
+ }
+ ```
+
+ ***
+
+ <h3 id="var">定数の指定方法</h3>
+
+ - グローバル(color.scssなど)の定数は原則大文字、スネークケース
+ - ローカル定数(各scssファイルで使いたい変数)はscssのルールで書く
+ - 定数の名前は主語が文頭、目的語が文末。 数字からや特殊文字から始まるのはNG
+ - 使える記号は`_`と`-`のみ。
+
+ ```
+ /* グローバル */
+ <NG>
+ $bp_desktop: 750px;
+ $color_main: #000;
+ $color_red: #ab0835;
+ $10_Width: 300px;
+ $+color-red: red;
+
+ <OK>
+ $BP_DESKTOP: 750px;
+ $COLOR_MAIN: #000;
+ $COLOR_RED: #ab0835;
+ ```
+
+ <h3 id="media">メディアクエリ</h3>
+
+ - scssのmixinで定義したものをincludeして使う
+ - 指定したい場所単位で使う
+
+ 例)
+
+ ```
+ <ブレイクポイント以下>
+ .sample1 {
+   @include mq-small {
+     color: $COLOR_MAIN
+   }
+ }
+
+ .sample2 {
+   @include mq-small {
+     color: $COLOR_MAIN
+   }
+ }
+
+ <ブレイクポイント以上>
+ .sample1 {
+   @include mq-large {
+     color: $COLOR_MAIN
+   }
+ }
+
+ .sample2 {
+   @include mq-large {
+     color: $COLOR_MAIN
+   }
+ }
+
+ ```
+
+ ***
+
+ <h3 id="font_size">font-sizeの指定</h3>
+
+ - サイズの指定方法は「rem」を使う
+ ...単に大きさを`px`と`rem`指定した差はありません。しかし、`px`は絶対指定なので、`font-family`やブラウザ毎の違いで大きさにムラが出てしまう。
+ `rem`はroot(html)を基準に大きさを計算するので、rootの大きさを決めてしまえば、大きさを統一出来る。
+
+ - scssのmixinで定義したものをincludeして使う
+ - `()`内に指定したい値を入れる
+
+ - 参考 [CSSで知っておきたい、フォントサイズ指定の単位のすべて](https://ferret-plus.com/7062)
+
+ ```
+ <NG>
+ .sample {
+   font-size: 12px;
+ }
+
+ <OK>
+ .sample {
+   @include font-size(12);
+ }
+ ```
+
+ ***
+
+ <h3 id="margin">余白のルール</h3>
+
+ - 外に余白をつけるときは、marginをつける
+ - marginは原則下方向`margin-bottom`をつける / 横方向は`margin-right`をつける
+
+ 例)
+ ```
+ <NG>
+ .sample {
+   margin: 20px 0 0 20px;
+   or
+   margin-right: 20px;
+ }
+
+ <OK>
+ .sample {
+   margin: 0 20px 20px 0;
+   or
+   margin-right: 20px;
+ }
+ ```
+
+ ***
+
+ <h3 id="js_css">Jsで扱う要素</h3>
+
+ - jsでアニメーションをさせたり、jsで扱う部分は文頭に「js-」をつける
+ - 「js-」をつけていない要素はjsで扱わない。
+ - 「js-」のclassにstyleは記述しない。トリガーとしてだけ使う
+
+ 例)
+
+ ```
+
+ <NG>
+ /* styleを当てる */
+ .js-hoge {
+   color: #000;
+ }
+
+
+ <OK>
+ .js-hogehoge
+ #js-hogehoge
+ ```
+
+ ***
+
+ <h3 id="short_hand">ショートハンドプロパティ</h3>
+
+ - 同じプロパティが複数ある場合はショートハンドを使う。
+ - 要注意なプロパティ `background`,`border`,`margin`,`padding`
+
+ 例)
+ ```
+ <NG>
+ padding-bottom: 2rem;
+ padding-left: 1rem;
+ padding-right: 1rem;
+ padding-top: 0;
+
+ <OK>
+ padding: 0 1rem 2rem;
+ ```
+
+ ***
+
+ <h3 id="prop_order">ディレクトリ/ファイルの命名規則</h3>
+
+ - ディレクトリ/ファイル名は、原則小文字で付ける
+ - 複数単語の場合は、`_`で区切る
+ - 文頭に特殊文字、数字はつけない
+ - application.scss(エントリーポイント)以外のscssファイルの文頭には `_` をつけてコンパイルしないようにする
+
+ 例)
+
+ ```
+ <NG>
+ `Sample.scss`
+ `sample-sample.scss`
+ `!sample.scss / 19sample.scss`
+
+ <OK>
+ `_sample.scss`
+ `_sample_sapmle.scss`
+ '_sample_01.scss'
+
+ ```
+
+ ***
 
 ## フォーマット
 
@@ -207,7 +436,7 @@ css:
 
  ```
  <NG>
- #sample {
+ #sample{
    margin-top: 1rem;
  }
 
@@ -365,6 +594,7 @@ css:
 
  - lint名 `no-color-keywords`
  - キーワードでカラーを指定しない
+ - 定数で指定する場合もキーワードカラーはNG
 
  例)
 
@@ -373,7 +603,7 @@ css:
  background-color: red;
 
  <OK>
- background-color: $COLOR_RED
+ background-color: $COLOR_RED;
  ```
 
  ***
@@ -529,7 +759,6 @@ css:
 
  - `content`プロパティのクォーテーションはシングルで指定
  - `before`,`after`を指定する場合は前に`&::`をつける
- - スタイルをつけるときはネストする
 
  例)
 
@@ -895,232 +1124,3 @@ p > .sample {
 ```
 
 ***
-
-## 守ってほしいルール
-
-<h3 id="prop_order">プロパティ記述順序</h3>
-
-- アルファベットの順に記述。ベンダープレフィックスは無視すること。ただし、例えば-moz接頭辞は-webkitの前に来る、などの順序は保つ。
-
-例)
-
-```
-<NG>
-width: 1059px;
-border: 1px solid;
--moz-border-radius: 4px;
-color: black;
-text-align: center;
--webkit-border-radius: 4px;
-
-<OK>
-border: 1px solid;
--moz-border-radius: 4px;
--webkit-border-radius: 4px;
-border-radius: 4px;
-color: black;
-text-align: center;
-width: 1059px;
-```
-
-***
-
- <h3 id="#prop_order_sass">プロパティの記述順序(sass)</h3>
- - `@include`などsass独特なプロパティ指定方法であっても、記述順序は統一する
- - その際プロパティの頭文字を見て判断すること。
-
- 例)
-
- ```
- <NG>
- .sample {
-   width: 300px;
-   @include font-size(12);
-   background: #000;
- }
-
- <OK>
- .sample {
-   background: #000;
-   @include font-size(12);
-   width: 300px;
- }
- ```
-
- ***
-
- <h3 id="var">定数の指定方法</h3>
-
- - グローバル(color.scssなど)の定数は原則大文字、スネークケース
- - ローカル定数(各scssファイルで使いたい変数)はscssのルールで書く
- - 定数の名前は主語が文頭、目的語が文末。 数字からや特殊文字から始まるのはNG
- - 使える記号は`_`と`-`のみ。
-
- ```
- /* グローバル */
- <NG>
- $bp_desktop: 750px;
- $color_main: #000;
- $color_red: #ab0835;
- $10_Width: 300px;
- $+color-red: red;
-
- <OK>
- $BP_DESKTOP: 750px;
- $COLOR_MAIN: #000;
- $COLOR_RED: #ab0835;
- ```
-
- <h3 id="media">メディアクエリ</h3>
-
- - scssのmixinで定義したものをincludeして使う
- - 指定したい場所単位で使う
-
- 例)
-
- ```
- <ブレイクポイント以下>
- .sample1 {
-   @include mq-small {
-     color: $COLOR_MAIN
-   }
- }
-
- .sample2 {
-   @include mq-small {
-     color: $COLOR_MAIN
-   }
- }
-
- <ブレイクポイント以上>
- .sample1 {
-   @include mq-large {
-     color: $COLOR_MAIN
-   }
- }
-
- .sample2 {
-   @include mq-large {
-     color: $COLOR_MAIN
-   }
- }
-
- ```
-
- ***
-
- <h3 id="font_size">font-sizeの指定</h3>
-
- - サイズの指定方法は「rem」を使う
- ...単に大きさを`px`と`rem`指定した差はありません。しかし、`px`は絶対指定なので、`font-family`やブラウザ毎の違いで大きさにムラが出てしまう。
- `rem`はroot(html)を基準に大きさを計算するので、rootの大きさを決めてしまえば、大きさを統一出来る。
-
- - scssのmixinで定義したものをincludeして使う
- - `()`内に指定したい値を入れる
-
- - 参考 [CSSで知っておきたい、フォントサイズ指定の単位のすべて](https://ferret-plus.com/7062)
-
- ```
- <NG>
- .sample {
-   font-size: 12px;
- }
-
- <OK>
- .sample {
-   @include font-size(12);
- }
- ```
-
- ***
-
- <h3 id="margin">余白のルール</h3>
-
- - 外に余白をつけるときは、marginをつける
- - marginは原則下方向`margin-bottom`をつける / 横方向は`margin-right`をつける
-
- 例)
- ```
- <NG>
- .sample {
-   margin: 20px 0 0 20px;
-   or
-   margin-right: 20px;
- }
-
- <OK>
- .sample {
-   margin: 0 20px 20px 0;
-   or
-   margin-right: 20px;
- }
- ```
-
- ***
-
- <h3 id="js_css">Jsで扱う要素</h3>
-
- - jsでアニメーションをさせたり、jsで扱う部分は文頭に「js-」をつける
- - 「js-」をつけていない要素はjsで扱わない。
- - 「js-」のclassにstyleは記述しない。トリガーとしてだけ使う
-
- 例)
-
- ```
-
- <NG>
- /* styleを当てる */
- .js-hoge {
-   color: #000;
- }
-
-
- <OK>
- .js-hogehoge
- #js-hogehoge
- ```
-
- ***
-
- <h3 id="short_hand">ショートハンドプロパティ</h3>
-
- - 同じプロパティが複数ある場合はショートハンドを使う。
- - 要注意なプロパティ `background`,`border`,`margin`,`padding`
-
- 例)
- ```
- <NG>
- padding-bottom: 2rem;
- padding-left: 1rem;
- padding-right: 1rem;
- padding-top: 0;
-
- <OK>
- padding: 0 1rem 2rem;
- ```
-
- ***
-
- <h3 id="prop_order">ディレクトリ/ファイルの命名規則</h3>
-
- - ディレクトリ/ファイル名は、原則小文字で付ける
- - 複数単語の場合は、`_`で区切る
- - 文頭に特殊文字、数字はつけない
- - application.scss(エントリーポイント)以外のscssファイルの文頭には `_` をつけてコンパイルしないようにする
-
- 例)
-
- ```
- <NG>
- `Sample.scss`
- `sample-sample.scss`
- `!sample.scss / 19sample.scss`
-
- <OK>
- `_sample.scss`
- `_sample_sapmle.scss`
- '_sample_01.scss'
-
- ```
-
- ***
