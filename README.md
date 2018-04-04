@@ -790,7 +790,7 @@ css:
 
  - 原則`last-child`を使う。
  - 途中の要素を変更したい場合は`nth-of-type`と`nth-child`を使う
- - `nth-oy-type`と`nth-child`の違いは要素（p, a, liなど）を判別して数えるかどうか。
+ - `nth-of-type`と`nth-child`の違いは要素（p, a, liなど）を判別して数えるかどうか。
  [擬似クラス nth-childとnth-of-type](https://qiita.com/kudo_kk/items/8277c1f0eae18e15dd64)
 
  例)
