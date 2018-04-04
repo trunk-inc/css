@@ -829,7 +829,7 @@ css:
 右寄せのブロック → .right
 
 <OK>
-青色のコメント → `.comment.comment_blue or`
+青色のコメント → `.comment.comment_blue`
 右寄せのブロック → .area.area_right
 ```
 
