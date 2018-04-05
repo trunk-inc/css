@@ -83,7 +83,6 @@
   1. [属性セレクタのネスト](#force_attribute_nesting)
   1. [セレクタ後ろ要素のネスト](#force_element_nesting)
   1. [ネスト時の行間](#empty_line_between_blocks)
-  1. [子孫セレクタ/隣接セレクタ](#no_combinators)
   1. [スタイルでのimportant禁止](#no_important)
 
  ### 守ってほしいルール
@@ -185,12 +184,14 @@ width: 1059px;
  ```
  <ブレイクポイント以下>
  .sample1 {
+ 
    @include mq-small {
      color: $COLOR_MAIN
    }
  }
 
  .sample2 {
+ 
    @include mq-small {
      color: $COLOR_MAIN
    }
@@ -198,12 +199,14 @@ width: 1059px;
 
  <ブレイクポイント以上>
  .sample1 {
+ 
    @include mq-large {
      color: $COLOR_MAIN
    }
  }
 
  .sample2 {
+ 
    @include mq-large {
      color: $COLOR_MAIN
    }
@@ -216,8 +219,8 @@ width: 1059px;
  <h3 id="font_size">font-sizeの指定</h3>
 
  - サイズの指定方法は「rem」を使う
- ...単に大きさを`px`と`rem`指定した差はありません。しかし、`px`は絶対指定なので、`font-family`やブラウザ毎の違いで大きさにムラが出てしまう。
- `rem`はroot(html)を基準に大きさを計算するので、rootの大きさを決めてしまえば、大きさを統一出来る。
+1px＝0.75ptであることから、デバイスによってピクセル比が異なるので大きさが変わる
+root(html)に依存するので、rootに基準となる大きさを決めておけば管理が楽になる
 
  - scssのmixinで定義したものをincludeして使う
  - `()`内に指定したい値を入れる
@@ -765,12 +768,14 @@ css:
  ```
  <NG>
  .sample {
+ 
    &:after {
      content: ="";
    }
  }
 
  .sample {
+ 
    sample ::after {
      width: 1059px;
    }
@@ -778,6 +783,7 @@ css:
 
  <OK>
  .sample {
+ 
    &::after {
      content: ='';
    }
@@ -800,6 +806,7 @@ css:
   /* scss */
  .sample {
    margin-right: 20px;
+   
    &:first-child {
      margin-right: 0;
    }
@@ -808,6 +815,7 @@ css:
  <OK>
  .sample {
    margin-right: 20px;
+   
    &:last-child {
      margin-right: 0;
    }
@@ -1033,12 +1041,12 @@ input {
 
 ```
 <NG>
-.sample p {
+div p {
   width: 1059px;
 }
 
 <OK>
-.sample {
+div {
   p {
     width: 1059px;
   }
@@ -1075,33 +1083,6 @@ input {
     &_sample {
       width: 1059px
     }
-  }
-}
-```
-
-***
-
-<h3 id="empty_line_between_blocks">子孫、隣接セレクタ</h3>
-
-- lint名 `no-combinators`
-- 原則子孫、隣接セレクタを使用しない
-- ただし、hover時のアニメーションなどで利用する場合は可(デザイナーと要相談)
-
-例)
-
-```
-<NG>
-p > .sample {
-  width: 1059px;
-}
-
-.foo .bar {
-  content: 'qux';
-}
-
-.foo {
-  > .bar {
-    content: 'foo';
   }
 }
 ```
