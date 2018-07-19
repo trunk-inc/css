@@ -151,6 +151,46 @@ width: 1059px;
  ```
 
  ***
+ 
+  <h3 id="#prop_order_element_sass">要素の記述順序(sass)</h3>
+ - セレクタやエレメントなどの要素を指定するときも、記述順序は統一する
+
+ 例)
+
+ ```
+ <NG>
+ .sample {
+  &__b {
+   ...
+  }
+  
+  &__a {
+   ...
+  }
+ }
+ 
+ .example {
+  ...
+ }
+
+ <OK>
+  .example {
+  ...
+  }
+  
+ .sample {
+  &__a {
+   ...
+  }
+  
+  &__b {
+   ...
+  }
+ }
+ 
+ ```
+
+ ***
 
  <h3 id="var">定数の指定方法</h3>
 
@@ -170,8 +210,8 @@ width: 1059px;
 
  <OK>
  $BP_DESKTOP: 750px;
- $COLOR_MAIN: #000;
- $COLOR_RED: #ab0835;
+ $COLOR_TRUNK_NOMAL: #...;
+ $COLOR_TRUNK_GREEN: #...;
  ```
 
  <h3 id="media">メディアクエリ</h3>
