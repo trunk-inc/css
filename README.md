@@ -152,8 +152,8 @@ width: 1059px;
 
  ***
  
-  <h3 id="#prop_order_element_sass">要素の記述順序(sass)</h3>
- - セレクタやエレメントなどの要素を指定するときも、記述順序は統一する
+  <h3 id="#prop_order_element_sass">要素(class/id)の記述順序</h3>
+ - セレクタやエレメントやモディファイアを指定するときも、記述順序は統一する
 
  例)
 
