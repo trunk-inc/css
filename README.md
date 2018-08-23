@@ -96,6 +96,7 @@
   1. [余白のルール](#margin)
   1. [Jsで扱う要素](#js_css)
   1. [ショートハンドプロパティ](#short_hand)
+  1. [line-heightの単位](#line-height)
 
 ***
 
@@ -344,6 +345,23 @@ root(html)に依存するので、rootに基準となる大きさを決めてお
 
  <OK>
  padding: 0 1rem 2rem;
+ ```
+
+ ***
+ 
+ <h3 id="line-height">line-heightの単位</h3>
+
+ - line-heightの単位はつけない
+
+ 例)
+ ```
+ <NG>
+ line-height: 1.2em;
+ line-height: 1.2px;
+ line-height: 1.2rem;
+
+ <OK>
+ line-height: 1.2;
  ```
 
  ***
