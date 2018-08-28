@@ -211,7 +211,7 @@ width: 1059px;
 
  <OK>
  $BP_DESKTOP: 750px;
- $COLOR_TRUNK_NOMAL: #...;
+ $COLOR_TRUNK_NORMAL: #...;
  $COLOR_TRUNK_GREEN: #...;
  ```
 
@@ -369,7 +369,6 @@ root(html)に依存するので、rootに基準となる大きさを決めてお
  <h3 id="prop_order">ディレクトリ/ファイルの命名規則</h3>
 
  - ディレクトリ/ファイル名は、原則小文字で付ける
- - 複数単語の場合は、`_`で区切る
  - 文頭に特殊文字、数字はつけない
  - application.scss(エントリーポイント)以外のscssファイルの文頭には `_` をつけてコンパイルしないようにする
 
@@ -378,11 +377,11 @@ root(html)に依存するので、rootに基準となる大きさを決めてお
  ```
  <NG>
  `Sample.scss`
- `sample-sample.scss`
  `!sample.scss / 19sample.scss`
 
  <OK>
  `_sample.scss`
+ `_sample-sample.scss`
  `_sample_sapmle.scss`
  '_sample_01.scss'
 
