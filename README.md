@@ -50,6 +50,13 @@
 .BlockName__Element.-large {}
 ```
 
+- `state` は `is-` プレフィックスをつけて対応する
+  - `state` はjavascriptのロジックにより変更されるものがある場合に使用する
+```
+.BlockName__.is-invalid {}
+.BlockName__.is-loading {}
+```
+
 ## 制作フロー
 
 ### Prを出すまでの流れ(作業者)
@@ -229,6 +236,7 @@ width: 1059px;
 
  - scssのmixinで定義したものをincludeして使う
  - 指定したい場所単位で使う
+ - 共通 SP PCの順番で記述する
 
  例)
 
@@ -898,11 +906,6 @@ css:
 ### element
 
 - `Block__Inner` コンテンツを囲むもの
-- `Block__Head` コンテンツの上部
-- `Block__Foot` コンテンツの下部
-- `Block__Left` コンテンツの左側
-- `Block__Right` コンテンツの右側
-- `Block__Center` コンテンツ中央
 - `Block__Heading` コンテンツのタイトル
 - `Block__Items` リストを囲むもの
 - `Block__Item` リスト
