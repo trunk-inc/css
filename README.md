@@ -6,6 +6,7 @@
 - react componentと対になるようにファイルを作成する
 - BEMなので基本ネストは使用しない。（エディタでの検索効率も上がる）
 - `js-` プレフィックスはreactの際は基本使用しない
+- 擬似要素、擬似セレクタのみ入れ子を許可する
 
 ### css(scss)のディレクトリ構成
 ```
@@ -822,7 +823,7 @@ css:
 
  例)
  ```
- <NG>
+ <OK>
 
   /* scss */
  .Sample {
@@ -832,15 +833,6 @@ css:
      margin-right: 0;
    }
  }
-
- <OK>
-.Sample {
-  margin-right: 20px;
-}
-
-.Sample:last-child {
-  margin-right: 0;
-}
  ```
 
  ***
