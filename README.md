@@ -1,43 +1,71 @@
 # TRUNK Css Style Guide
 
 ## 概要
-- BEMとGoogleのルールに則る
-- BEMは色々なルールがあるが、TRUNKは公式に則る
-- cssはcss3に対応する
-- cssはscssで書く
-- sass-lintを導入する lintで弾かれた場合修正すること
+- react componentとの親和性を考慮し、chainable bemを採用する
+- 下記の参考に加え、javascriptのクラス命名の慣例に沿ってルールを加える
+- react componentと対になるようにファイルを作成する
+- BEMなので基本ネストは使用しない。（エディタでの検索効率も上がる）
+- `js-` プレフィックスはreactの際は基本使用しない
+- 擬似要素、擬似セレクタのみ入れ子を許可する
 
-[BEM公式ドキュメント](https://en.bem.info/methodology/quick-start/#modifier)
-[google公式翻訳](http://buchineko.website/google_styleguide_html/)
+### css(scss)のディレクトリ構成
+```
+/(cssのルート)
+  atoms
+    _button.scss
+    _index.scss <= atomsを全てインポート
+  molecules
+  organisms
+  templates
+  pages
+  layouts
+  variables <= 変数を格納
+    _color.scss
+    _index_.scss
+  mixins <= mixinを格納
+    _mediaquery.scss
+    _index.scss
+  application.scss
+```
 
 参考
-- [GoogleのCSSガイダンスに沿ったコーディング方法について](https://seopack.jp/internal-seo/basic/google-css-style-guide.php)
-- [Google HTML/CSS Style Guide まとめ](https://qiita.com/Sugima/items/785644372397595644ba)
+- [Chainable BEM modifiers](https://webuild.envato.com/blog/chainable-bem-modifiers/)
 
-### BEMの書き方
-- クラスは **ケバブケース** で書く
-例) `.block-name` `.block-name__element_modifier`
+### cahinable bemの書き方
+- クラスは **アッパーキャメル** で書く
+  - javascriptのクラス名に合わせる為にアッパーキャメルは独自ルール
+  - `modifire` はクラスではないのでキャメルケース
+```
+.Block {}
+.Block__Element {}
+```
 
-- `block` は **小文字** 始まり
-例) `.block`
-<br>
+- `element` は **アンスコ2個**  
+```
+.BlockName__Element
+```
 
-- `element` は **アンスコ2個**
-例) `.block-name__element`
-<br>
+- `modifier` は **別クラスを定義し、ハイフンをプレフィックスとしてつける**  
+```
+.BlockName__Element {}
+.BlockName__Element.-large {}
+```
 
-- `modifier` は **アンスコ1個**
-例) `.block-name__element_modifier`
-<br>
+- `state` は `is-` プレフィックスをつけて対応する
+  - `state` はjavascriptのロジックにより変更されるものがある場合に使用する
+```
+.BlockName__.is-invalid {}
+.BlockName__.is-loading {}
+```
 
 ## 制作フロー
 
 ### Prを出すまでの流れ(作業者)
 
 1. ガイドラインに沿ってコーディングする
-1. 作業後必ず`sass-lint`を通す
-1. `守ってほしいルール`を守れているのか確認する
-1. 通ればPrを出す
+2. 作業後必ず`sass-lint`を通す
+3. `守ってほしいルール`を守れているのか確認する
+4. 通ればPrを出す
 
 ### Prレビューチェック(管理者)
 
@@ -80,10 +108,8 @@
   1. [擬似クラス(余白の指定)](#pseudo_margin)
   1. [インポート](#import)
   1. [before-nesting](#nesting)
-  1. [属性セレクタのネスト](#force_attribute_nesting)
-  1. [セレクタ後ろ要素のネスト](#force_element_nesting)
-  1. [ネスト時の行間](#empty_line_between_blocks)
-  1. [スタイルでのimportant禁止](#no_important)
+  2. [セレクタ後ろ要素のネスト](#force_element_nesting)
+  3. [スタイルでのimportant禁止](#no_important)
 
  ### 守ってほしいルール
 
@@ -94,9 +120,8 @@
   1. [メディアクエリ](#media)
   1. [font-size指定](#font_size)
   1. [余白のルール](#margin)
-  1. [Jsで扱う要素](#js_css)
-  1. [ショートハンドプロパティ](#short_hand)
-  1. [line-heightの単位](#line-height)
+  2. [ショートハンドプロパティ](#short_hand)
+  3. [line-heightの単位](#line-height)
 
 ***
 
@@ -137,14 +162,14 @@ width: 1059px;
 
  ```
  <NG>
- .sample {
+ .Sample {
    width: 300px;
    @include font-size(12);
    background: #000;
  }
 
  <OK>
- .sample {
+ .Sample {
    background: #000;
    @include font-size(12);
    width: 300px;
@@ -175,20 +200,13 @@ width: 1059px;
  }
 
  <OK>
-  .example {
+.Example {
   ...
-  }
-  
- .sample {
-  &__a {
-   ...
-  }
-  
-  &__b {
-   ...
-  }
- }
- 
+}
+
+.Example__A {}
+
+.Example__B {} 
  ```
 
  ***
@@ -219,40 +237,19 @@ width: 1059px;
 
  - scssのmixinで定義したものをincludeして使う
  - 指定したい場所単位で使う
+ - 共通 SP PCの順番で記述する
 
  例)
 
  ```
  <ブレイクポイント以下>
- .sample1 {
- 
-   @include mq-small {
-     color: $COLOR_MAIN
-   }
- }
+.Sample {}
 
- .sample2 {
- 
-   @include mq-small {
-     color: $COLOR_MAIN
-   }
- }
-
- <ブレイクポイント以上>
- .sample1 {
- 
-   @include mq-large {
-     color: $COLOR_MAIN
-   }
- }
-
- .sample2 {
- 
-   @include mq-large {
-     color: $COLOR_MAIN
-   }
- }
-
+@include mq-small {
+  .Sample {
+    color: $COLOR_MAIN
+  }
+}
  ```
 
  ***
@@ -270,12 +267,12 @@ root(html)に依存するので、rootに基準となる大きさを決めてお
 
  ```
  <NG>
- .sample {
+ .Sample {
    font-size: 12px;
  }
 
  <OK>
- .sample {
+ .Sample {
    @include font-size(12);
  }
  ```
@@ -290,14 +287,14 @@ root(html)に依存するので、rootに基準となる大きさを決めてお
  例)
  ```
  <NG>
- .sample {
+ .Sample {
    margin: 20px 0 0 20px;
    or
    margin-right: 20px;
  }
 
  <OK>
- .sample {
+ .Sample {
    margin: 0 20px 20px 0;
    or
    margin-right: 20px;
@@ -306,31 +303,7 @@ root(html)に依存するので、rootに基準となる大きさを決めてお
 
  ***
 
- <h3 id="js_css">Jsで扱う要素</h3>
-
- - jsでアニメーションをさせたり、jsで扱う部分は文頭に「js-」をつける
- - 「js-」をつけていない要素はjsで扱わない。
- - 「js-」のclassにstyleは記述しない。トリガーとしてだけ使う
-
- 例)
-
- ```
-
- <NG>
- /* styleを当てる */
- .js-hoge {
-   color: #000;
- }
-
-
- <OK>
- .js-hogehoge
- #js-hogehoge
- ```
-
- ***
-
- <h3 id="short_hand">ショートハンドプロパティ</h3>
+<h3 id="short_hand">ショートハンドプロパティ</h3>
 
  - 同じプロパティが複数ある場合はショートハンドを使う。
  - 要注意なプロパティ `background`,`border`,`margin`,`padding`
@@ -371,7 +344,7 @@ root(html)に依存するので、rootに基準となる大きさを決めてお
  - ディレクトリ/ファイル名は、原則小文字で付ける
  - 文頭に特殊文字、数字はつけない
  - application.scss(エントリーポイント)以外のscssファイルの文頭には `_` をつけてコンパイルしないようにする
- - scssファイルは1blockにつき1ファイルで作成する. 逆に言うと1ファイル内に複数のblockが定義されているのは違反
+ - sassファイルは１ファイル１コンポーネントとする
 
  例)
 
@@ -382,10 +355,7 @@ root(html)に依存するので、rootに基準となる大きさを決めてお
 
  <OK>
  `_sample.scss`
- `_sample-sample.scss`
- `_sample_sapmle.scss`
- '_sample_01.scss'
-
+ `_sampleSample.scss`
  ```
 
  ***
@@ -395,7 +365,7 @@ root(html)に依存するので、rootに基準となる大きさを決めてお
 <h3 id="inline">基本的にインラインでは記述しない</h3>
 
 - cssはインライン(slim)内には原則記述しない
-- ただし裏側の処理の部分で必要な場合は可
+- ~~ただし裏側の処理の部分で必要な場合は可~~ <= reactなので今後は原則書かない
 
 例)
 
@@ -409,11 +379,6 @@ css:
   }
 
 .sample style="width: 1059px;"
-
-<OK>
-- @hogehoge.each do |hogehoge|
-  .sample style="background-image:url(#{hogehoge.image.hogehoge});"
-
 ```
 
 ***
@@ -426,16 +391,16 @@ css:
 
  ```
  <NG>
- .block {
- &__element {
+ .Block {
+ &__Element {
  color: #333;
  display: block;
  }
  }
 
  <OK>
- .block {
-   &__element {
+ .Block {
+   &__Element {
      color: #333;
      display: block;
    }
@@ -453,13 +418,13 @@ css:
 
  ```
  <NG>
- .sample {
+ .Sample {
    display: block;
    height: 100px
  }
 
  <OK>
- .sample {
+ .Sample {
    display: block;
    height: 100px;
  }
@@ -476,12 +441,12 @@ css:
 
  ```
  <NG>
- .sample {
+ .Sample {
    display:block;
  }
 
  <OK>
- .sample {
+ .Sample {
    display: block;
  }
 
@@ -497,18 +462,18 @@ css:
 
  ```
  <NG>
- #sample{
+ #Sample{
    margin-top: 1rem;
  }
 
  /* 改行は必要ない */
- #sample
+ #Sample
  {
    margin-top: 1rem;
  }
 
  <OK>
- #sample {
+ #Sample {
    margin-top: 1rem;
  }
 
@@ -525,12 +490,12 @@ css:
 
  ```
  <NG>
- .sample {
+ .Sample {
    box-shadow: 1px 1px $COLOR_MAIN,1px 1px $COLOR_MAIN;
  }
 
  <OK>
- .sample {
+ .Sample {
    box-shadow: 1px 1px $COLOR_MAIN, 1px 1px $COLOR_MAIN;
  }
 
@@ -547,12 +512,12 @@ css:
 
  ```
  <NG>
- .sample {
+ .Sample {
    width: 1000px+59px;
  }
 
  <OK>
- .sample {
+ .Sample {
    width: 1000px + 59px;
  }
 
@@ -569,7 +534,7 @@ css:
 
  ```
  <NG>
- .sample {
+ .Sample {
 
  }
 
@@ -587,7 +552,7 @@ css:
  ```
  /* 小数点を省略 */
  <NG>
- .sample {
+ .Sample {
    font-size: 0.8rem;
    opacity: 0.5;
    transition all 0.2s;
@@ -595,7 +560,7 @@ css:
  }
 
  <OK>
- .sample {
+ .Sample {
    font-size: .8rem;
    opacity: .5;
    transition all .2s;
@@ -604,13 +569,13 @@ css:
 
  /* 単位を省略 */
  <NG>
- .sample {
+ .Sample {
    margin: 0px;
    padding: 0px;
  }
 
  <OK>
- .sample {
+ .Sample {
    margin: 0;
    padding: 0;
  }
@@ -677,12 +642,12 @@ css:
 
  ```
  <NG>
- .sample {
+ .Sample {
    color: #444; display:block; width: 300px;
  }
 
  <OK>
- .sample {
+ .Sample {
    color: #444;
    display: block;
    width: 300px;
@@ -700,13 +665,13 @@ css:
 
  ```
  <NG>
- .sample, .hogehoge {
+ .Sample, .Hogehoge {
    display:block;
  }
 
  <OK>
- .sample,
- .hogehoge {
+ .Sample,
+ .Hogehoge {
    display: block;
  }
 
@@ -762,7 +727,7 @@ css:
  <OK>
  /* header */
 
- .header{
+ .Header{
   hogehoge...
  }
 
@@ -770,7 +735,7 @@ css:
 
  /* main */
 
- .main{
+ .Main{
   hogehoge...
  }
 
@@ -778,7 +743,7 @@ css:
 
  /* footer */
 
- .footer{
+ .Footer{
    hogehoge...
  }
 
@@ -804,12 +769,12 @@ css:
 
  ```
  <NG>
- .sample {
+ .Sample {
    border-bottom: none;
  }
 
  <OK>
- .sample {
+ .Sample {
    border-bottom: 0;
  }
  ```
@@ -825,27 +790,26 @@ css:
 
  ```
  <NG>
- .sample {
+ .Sample {
  
    &:after {
      content: ="";
    }
  }
 
- .sample {
+ .Sample {
  
-   sample ::after {
+   sample::after {
      width: 1059px;
    }
  }
 
- <OK>
- .sample {
- 
-   &::after {
-     content: ='';
-   }
- }
+<OK>
+.Sample {}
+
+.Sample::after {
+  content: ='';
+}
  ```
 
  ***
@@ -859,22 +823,13 @@ css:
 
  例)
  ```
- <NG>
+ <OK>
 
   /* scss */
- .sample {
+ .Sample {
    margin-right: 20px;
    
    &:first-child {
-     margin-right: 0;
-   }
- }
-
- <OK>
- .sample {
-   margin-right: 20px;
-   
-   &:last-child {
      margin-right: 0;
    }
  }
@@ -885,7 +840,7 @@ css:
  ## クラスの命名ルール
 
  - 参考にしたもの[CSSのクラス名を決めるときに使うリストをつくりました](https://qiita.com/manabuyasuda/items/dbb76ed36970bec95470)
- - クラス名は「何処で」「何を表現」するのかを端的な名前で表す。
+ - クラスめいは「ブロック」「エレメント」「状態」を想像しやすい端的な名前で表す。
 
 例)
 
@@ -899,114 +854,80 @@ css:
 右寄せのブロック → .area.area_right
 ```
 
- - 「構造の意味の判斷がつかないもの」「構造の意味がないもの」に関しては汎用的なクラスを付ける。
+ - ~~「構造の意味の判斷がつかないもの」「構造の意味がないもの」に関しては汎用的なクラスを付ける。~~ <= 基本的にはジェネラルクラスは使用しない。変数を使用する
+ - [ジェネラルクラスとは？](https://coliss.com/articles/build-websites/operation/css/200.html)
 
- 例)
+### pages(参考程度に)
 
- ```
- ２カラムのレイアウト → .area .area__two-column
- ３カラムのレイアウト > .area__three-column
- ```
+- `FirmTimeLine` 企業タイムライン
+- `Trainings` トレーニング一覧
 
-### 比較
+### component
 
-- `student` 学生側にしかないもの
-- `global` 全体的に使うもの
+- `Button` ボタン
+- `IconButton` アイコン付きのボタン
+- `Heading` 見出し・表題
+- `Thumbnail` サムネイル
+- `Sort` ソート部分(職種絞り込みなど)
+- `Skilltag` スキルタグ
+- `Circle` 円のアイコンなど
+- `Icon` アイコン
+- `Notification` 通知
+- `Datetime` 日付日時
+- `Pagenation` ページネーション
+- `Logo` ロゴ
+- `Tab` タブ
+- `Link` リンク
+- `Carousel` 画像などをスライドさせる部分
+- `Banner` バナー
+- `Text` テキスト
+- `Container` pages/partsらを囲む
+- `Sidebar` サイドバー
+- `Pickup` 選び出す
+- `History` 更新履歴、沿革
 
-### pages
-
-- `timeline` タイムライン
-- `training` トレーニング一覧
-- `training-detail` トレーニング詳細
-- `intern` インターン一覧
-- `intern-detail` インターン詳細
-- `dashbord` ダッシュボード
-- `job` 求人ページ
-- `mypage` レジュメ
-- `myproject` プロジェクト詳細
-- `chat` チャット画面
-- `home` トップページ
-- `announce` お知らせ画面
-- `form` プロフィール編集/プロジェクト登録/職歴登録・編集
-- `tutorial` チュートリアル画面
-- `student-firm` 学生側の企業一覧
-- `student-firm-detail` 学生側の企業詳細
-- `firm` 企業側ページ
-- `admin` 管理側ページ
-- `guide` ガイドページ
-
-### modules
-
-- `button` ボタン
-- `icon-button` アイコン付きのボタン
-- `buttons` ボタンを囲むもの
-- `heading` 見出し・表題
-- `thumbnail` サムネイル
-- `sort` ソート部分(職種絞り込みなど)
-- `skilltag` スキルタグ
-- `circle` 円のアイコンなど
-- `icon` アイコン
-- `notification` 通知
-- `datetime` 日付日時
-- `pagenation` ページネーション
-- `logo` ロゴ
-- `tab` タブ
-- `link` リンク
-- `carousel` 画像などをスライドさせる部分
-- `banner` バナー
-- `text` テキスト
-- `container` pages/partsらを囲む
-- `sidebar` サイドバー
-- `pickup` 選び出す
-- `history` 更新履歴、沿革
-
-- `imgaes` トレーニング画像やインターンの画像
-- `media` テキスト+画像
-- `card/area` レイアウトのためのボックス
-- `sns` snsをまとめるもの
-- `global-header` ヘッダー
-- `global-footer` フッター
-- `student-navigation` 学生側ナビゲーション
-- `breadcrumb` パンくずリスト
+- `Imgaes` トレーニング画像やインターンの画像
+- `Media` テキスト+画像
+- `Card/Area` レイアウトのためのボックス
+- `SNS` snsをまとめるもの
+- `GlobalHeader` ヘッダー
+- `GlobalFooter` フッター
+- `StudentNavigation` 学生側ナビゲーション
+- `Breadcrumb` パンくずリスト
 
 ### element
 
-- `inner` コンテンツを囲むもの
-- `head` コンテンツの上部
-- `foot` コンテンツの下部
-- `left` コンテンツの左側
-- `right` コンテンツの右側
-- `center` コンテンツ中央
-- `heading` コンテンツのタイトル
-- `items` リストを囲むもの
-- `item` リスト
-- `texts` テキストを囲むもの
-- `success` 完了時
-- `label` ラベル
+- `Block__Inner` コンテンツを囲むもの
+- `Block__Heading` コンテンツのタイトル
+- `Block__Items` リストを囲むもの
+- `Block__Item` リスト
+- `Block__Texts` テキストを囲むもの
+- `Block__Success` 完了時
+- `Block__Label` ラベル
 
 ### modifier
 
-- `small` 小さい
-- `medium` 中間
-- `large` 大きい
-- `left` 左側
-- `right` 右側
-- `center` 真ん中
-- `student` TRUNK学生側カラー(グリーン)
-- `firm` TRUNK企業側カラー(ブルー)
-- `navy` TRUNKネイビー(ネイビー)
-- `gray` TRUNKグレー(グレー)
-- `next` 次
-- `prev` 前
-- `more` もっと
-- `current` 現在位置
-- `hidden` 非表示
-- `visible` 表示
-- `success` 完了時
-- `notice` 通知
-- `wanted` 募集
-- `full` 満員
-- `slightly` わずか(残数)
+- `-small` 小さい
+- `-medium` 中間
+- `-large` 大きい
+- `-left` 左側
+- `-right` 右側
+- `-center` 真ん中
+- `-student` TRUNK学生側カラー(グリーン)
+- `-firm` TRUNK企業側カラー(ブルー)
+- `-navy` TRUNKネイビー(ネイビー)
+- `-gray` TRUNKグレー(グレー)
+- `-next` 次
+- `-prev` 前
+- `-more` もっと
+- `-current` 現在位置
+- `-hidden` 非表示
+- `-visible` 表示
+- `-success` 完了時
+- `-notice` 通知
+- `-wanted` 募集
+- `-full` 満員
+- `-slightly` わずか(残数)
 
  ***
 
@@ -1014,9 +935,9 @@ css:
 
 - importするファイル名にアンダースコアをつけない
 - importするファイルの拡張子をつけるか
+- applocatopn.scssはディレクトリ名でimportする
 
 例) importするファイルの拡張子をつけるか
-
 ```
 <NG>
 @import 'sample.scss';
@@ -1027,122 +948,24 @@ css:
 @import 'icon/sample';
 ```
 
- 例) importするファイル名にアンダースコアをつけない
-
- ```
- <NG>
+例) importするファイル名にアンダースコアをつけない
+```
+<NG>
 @import '_sample';
 @import '_icon/_sample';
 
- <OK>
+<OK>
 @import 'sample';
 @import 'icon/sample';
- ```
+```
 
-***
-
-<h3 id="nesting">before-nesting</h3>
-
-- 親クラスのスタイルをネストしたエレメントの後に書かない
-
- ```
- <NG>
-.sample {
-  &__sample {
-    width: 300px;
-  }
-
-  width: 300px;
-}
-
- <OK>
-.sample {
-  width: 300px;
-
-  &__sample {
-    width: 300px;
-  }
-}
- ```
-
-***
-
-<h3 id="force_attribute_nesting">属性セレクタのネスト</h3>
-
-- lint名 `force-attribute-nesting`
-- 属性セレクタを続けて記述する場合はネストする
-
-例)
-
+例) applocatopn.scssはディレクトリ名でimportする
 ```
 <NG>
-input[type='text'] {
-  width: 1059px;
-}
+@import 'atoms/index.scss'
 
-// OK
-input {
-  &[type='text'] {
-    width: 1059px;
-  }
-}
-```
-
-***
-
-<h3 id="force_element_nesting">セレクタ後ろ要素のネスト</h3>
-
-- セレクタの後ろに続く要素は入れ子にする
-- lint名 `force_element_nesting`
-
-例)
-
-```
 <NG>
-div p {
-  width: 1059px;
-}
-
-<OK>
-div {
-  p {
-    width: 1059px;
-  }
-}
-```
-
-***
-
-<h3 id="empty_line_between_blocks">ネスト時の行間</h3>
-
-- ネストした時に各セレクタの上の行を1行空ける
-
-例)
-
-```
-<NG>
-.sample {
-  width: 1059px
-  &__sample {
-    width: 1059px
-    &_sample {
-      width: 1059px
-    }
-  }
-}
-
-<OK>
-.sample {
-  width: 1059px
-
-  &__sample {
-    width: 1059px
-
-    &_sample {
-      width: 1059px
-    }
-  }
-}
+@import 'atoms'
 ```
 
 ***
